@@ -41,7 +41,7 @@
         <div class="form-progress" aria-label="Form progress">
           <div class="progress-top"><span id="step-count">STEP 01 OF 05</span><span id="step-percent">20% COMPLETE</span></div>
           <div class="progress-track"><span id="progress-fill"></span></div>
-          <div class="progress-labels"><span class="active" data-progress-label="0">Your details</span><span data-progress-label="1">The property</span><span data-progress-label="2">Spaces</span><span data-progress-label="3">Design</span><span data-progress-label="4">Review</span></div>
+          <div class="progress-labels" aria-label="Project brief steps"><span class="active" aria-current="step" data-progress-label="0">Your details</span><span data-progress-label="1">The property</span><span data-progress-label="2">Spaces</span><span data-progress-label="3">Design</span><span data-progress-label="4">Review</span></div>
         </div>
 
         <form id="project-form" novalidate>
@@ -114,7 +114,7 @@
             <div class="upload-panel">
               <div class="upload-heading"><span class="upload-icon" aria-hidden="true">＋</span><div><h3>Upload your pegs & site references</h3><p>Inspiration images, Pinterest screenshots, sketches, floor plans, lot plans, and site photos.</p></div></div>
               <label class="upload-drop" for="attachments"><span class="upload-cloud" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 21V7m0 0-5 5m5-5 5 5M7 20v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Choose files to upload</strong><span>JPG, PNG, WEBP, or PDF · Up to 12 files · 10 MB total</span><input id="attachments" name="attachments" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" multiple></label>
-              <ul class="file-list" id="file-list" aria-live="polite"></ul>
+              <ul class="file-list" id="file-list" aria-label="Selected reference files"></ul><p class="upload-summary" id="upload-summary" aria-live="polite">No files selected. You can submit the brief without attachments.</p>
               <p class="field-hint">Only share documents and images you have permission to send. Please avoid IDs, financial documents, or other sensitive personal records.</p>
             </div>
           </section>
