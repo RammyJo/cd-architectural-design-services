@@ -10,7 +10,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "dev:cloudflare": "npx wrangler pages dev public",
     "deploy": "npm run build && npx wrangler pages deploy dist --project-name cd-architectural-design-services",
-    "check": "node --check public/site.js && node --check public/brief.js && node --check vite.config.js && node --input-type=module --check < functions/api/submit.js"
+    "check": "node --check public/site.js && node --check public/brief.js && node --check vite.config.js && node --input-type=module --check < functions/api/submit.js",
+    "test": "node --test"
   },
   "devDependencies": {
     "busboy": "^1.6.0",
