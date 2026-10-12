@@ -473,3 +473,82 @@ h1 em, h2 em { color: var(--olive); font-weight: 400; }
 
 .contact-address p { margin: 14px 0 4px; }
 .contact-address a { color: var(--olive-dark); font-size: 9px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+
+/* Quality pass: clearer type, touch targets, responsive form controls, and navigation states. */
+:root { color-scheme: light; --muted: #62675d; }
+body { font-size: 16px; line-height: 1.72; }
+.primary-nav { font-size: 13px; }
+.eyebrow { font-size: 10px; letter-spacing: 1.55px; }
+.hero-text { font-size: 16px; line-height: 1.8; }
+.intro-copy, .section-heading > p, .process-sticky > p:not(.eyebrow), .contact-layout > div > p:not(.eyebrow), .privacy-lead { font-size: 14px; line-height: 1.85; }
+.service-card p, .direction-label p, .process-step p, .faq-item > p, .scope-note { font-size: 13px; line-height: 1.8; }
+.service-card > a, .process-sticky .text-link, .text-link, .faq-intro .text-link { font-size: 12px; }
+.faq-item summary { font-size: 13px; }
+.contact-card-copy, .contact-empty { font-size: 13px; }
+.contact-method { font-size: 13px; }
+.contact-card-note { font-size: 11px; line-height: 1.75; }
+.footer-bottom { font-size: 10px; }
+.site-footer a:focus-visible, .faq-item summary:focus-visible, .file-remove:focus-visible, .draft-clear:focus-visible, .review-edit:focus-visible { outline: 2px solid var(--clay); outline-offset: 4px; }
+.button { min-height: 48px; font-size: 12px; }
+.form-progress { scroll-margin-top: 100px; }
+.progress-top { font-size: 10px; letter-spacing: 1px; }
+.progress-labels { font-size: 10px; line-height: 1.35; }
+.progress-labels span { overflow-wrap: anywhere; }
+.field > label, .rooms-heading > label, .upload-heading h3 { font-size: 13px; }
+.field input, .field select, .field textarea { font-size: 15px; }
+.field-hint { font-size: 12px; line-height: 1.65; }
+.choice-card span, .priority-pills label span { font-size: 12px; line-height: 1.4; }
+.choice-card { min-height: 46px; }
+.upload-drop { min-height: 165px; }
+.upload-drop:focus-within { outline: 2px solid var(--clay); outline-offset: 4px; }
+.file-list { display: grid; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+.file-item { display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 12px; min-width: 0; padding: 10px 12px; border: 1px solid #e6e4dc; background: #fffefa; }
+.file-name { min-width: 0; overflow-wrap: anywhere; color: var(--ink-soft); font-size: 12px; }
+.file-size { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.file-remove { min-height: 36px; padding: 6px 9px; border: 1px solid #d6d4c9; color: var(--ink-soft); background: transparent; font: inherit; font-size: 11px; cursor: pointer; }
+.file-remove:hover { border-color: var(--ink-soft); color: var(--ink); }
+.upload-summary { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.draft-status { font-size: 11px; line-height: 1.6; }
+.draft-clear { min-height: 40px; font-size: 11px; }
+.form-step h2, .success-panel h2 { line-height: 1.15; }
+.review-card-head h3 { font-size: 13px; }
+.review-edit { min-height: 36px; font-size: 12px; }
+.review-fields dt { font-size: 12px; }
+.review-fields dd { font-size: 12px; }
+.review-empty, .review-attachments > strong { font-size: 12px; }
+.review-attachments p, .review-attachments li { font-size: 12px; }
+.privacy-draft-note { font-size: 12px; }
+.privacy-section p { font-size: 13px; line-height: 1.85; }
+.privacy-updated { font-size: 11px; }
+.image-lightbox { overscroll-behavior: contain; }
+.lightbox-close { min-height: 44px; font-size: 12px; }
+.menu-toggle { min-width: 44px; min-height: 44px; }
+::selection { color: #fffefa; background: #454d3b; }
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .container { width: calc(100% - 36px); }
+  .hero { gap: 30px; padding-top: 38px; padding-bottom: 50px; }
+  .hero h1 { letter-spacing: -1.4px; }
+  .hero-image-frame { height: clamp(300px, 76vw, 450px); }
+  .hero-stamp { right: -4px; width: 104px; height: 104px; font-size: 8px; }
+  .section-heading > p { font-size: 14px; }
+  .service-card p { font-size: 13px; }
+  .direction-label p { font-size: 12px; }
+  .faq-item summary { font-size: 13px; }
+  .form-progress { padding: 20px 18px 17px; }
+  .progress-labels { gap: 6px; font-size: 9px; line-height: 1.25; }
+  .choice-card span, .priority-pills label span { font-size: 12px; }
+  .file-item { grid-template-columns: minmax(0,1fr) auto; gap: 6px 10px; }
+  .file-name { grid-column: 1 / -1; }
+  .file-remove { justify-self: start; }
+  .form-actions .button-dark { min-width: 145px; }
+  .privacy-section p { font-size: 13px; }
+}
+@media (max-width: 390px) {
+  .container { width: calc(100% - 28px); }
+  .progress-labels { font-size: 8px; gap: 4px; }
+  .choice-card span, .priority-pills label span { font-size: 11px; }
+  .hero h1 { font-size: clamp(43px, 12vw, 54px); }
+}
