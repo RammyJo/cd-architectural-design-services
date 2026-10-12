@@ -47,12 +47,16 @@ The normal `npm run dev` command is intentionally simple and does not require a 
 
 For a real public site, configure Cloudflare D1 and R2 in `wrangler.jsonc`, set the business notification email, configure a Resend API key for email notifications, then use `npm run deploy`. Detailed deployment steps are below in the [Cloudflare setup section](#cloudflare-pages-setup). Do not deploy with placeholder database IDs or contact details.
 
-### Build check
+### Checks and build
 
 ```bash
+npm run check
+npm test
 npm run build
 npm run preview
 ```
+
+The automated checks validate JavaScript syntax and the inquiry backend's storage configuration, upload-signature checks, honeypot, and normal submission path.
 
 ## Files
 
