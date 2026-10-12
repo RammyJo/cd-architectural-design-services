@@ -39,6 +39,9 @@ jobs:
       - name: Check JavaScript syntax
         run: npm run check
 
+      - name: Test inquiry backend
+        run: npm test
+
       - name: Build website
         run: npm run build
 
