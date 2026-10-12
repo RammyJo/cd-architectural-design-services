@@ -1,7 +1,7 @@
 {
   "name": "cd-architectural-design-services",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "C + D Architectural Design Services website and project inquiry form",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --open",
@@ -9,7 +9,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "dev:cloudflare": "npx wrangler pages dev public",
-    "deploy": "npx wrangler pages deploy public --project-name cd-architectural-design-services"
+    "deploy": "npx wrangler pages deploy public --project-name cd-architectural-design-services",
+    "check": "node --check public/site.js && node --check public/brief.js && node --check vite.config.js && node --input-type=module --check < functions/api/submit.js"
   },
   "devDependencies": {
     "busboy": "^1.6.0",
