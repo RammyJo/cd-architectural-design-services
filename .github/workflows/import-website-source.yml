@@ -1,41 +1,40 @@
-name: Import website source
+name: Validate C + D website
 
 on:
   push:
+    branches: [main]
     paths:
-      - "cd-architectural-design-services.zip"
+      - "cd-architectural-design-services/**"
+      - ".github/workflows/import-website-source.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "cd-architectural-design-services/**"
+      - ".github/workflows/import-website-source.yml"
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  import-source:
+  build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cd-architectural-design-services
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          persist-credentials: true
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cd-architectural-design-services/package.json
 
-      - name: Extract website project into the repository
-        shell: bash
-        run: |
-          set -euo pipefail
-          unzip -q cd-architectural-design-services.zip -d /tmp/cd-website
-          test -f /tmp/cd-website/cd-architectural-design-services/public/index.html
-          cp -a /tmp/cd-website/cd-architectural-design-services/. .
-          rm -f cd-architectural-design-services.zip
+      - name: Install dependencies
+        run: npm install
 
-      - name: Commit source files
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No source changes to commit."
-            exit 0
-          fi
-          git commit -m "Import complete C + D website source"
-          git push
+      - name: Build website
+        run: npm run build
