@@ -183,7 +183,7 @@ export async function onRequestPost({ request, env }) {
             from: env.FROM_EMAIL,
             to: [env.NOTIFY_EMAIL],
             reply_to: data.email,
-            subject: `New architectural inquiry: ${asText(data.name, 100).replace(/[\\r\\n\\t]+/g, ' ').replace(/\\s+/g, ' ')}`,
+            subject: `New architectural inquiry: ${asText(data.name, 100).replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ')}`,
             text: summary,
             attachments: emailAttachments
           })
