@@ -1,24 +1,34 @@
 # C + D Architectural Design Services
 
-Repository setup is ready. The website source is provided as a ZIP from the project handoff; one upload will expand it into editable website files in this repository.
+The website source is now committed in the `cd-architectural-design-services/` folder.
 
-## Complete the initial import (one-time)
+## Run locally
 
-1. Download the `cd-architectural-design-services.zip` project archive from the ChatGPT conversation.
-2. Open [the repository's upload page](https://github.com/RammyJo/cd-architectural-design-services/upload/main).
-3. Upload the ZIP file to the repository root, keeping its filename exactly `cd-architectural-design-services.zip`.
-4. Commit the upload to `main`.
-5. Open the **Actions** tab and watch **Import website source**. It should extract the website into normal source files, remove the uploaded ZIP, and commit the imported files automatically.
+1. Open or clone this repository.
+2. Open a terminal in `cd-architectural-design-services/`.
+3. Run:
 
-After that workflow succeeds, this repository will contain the complete website and this README will be replaced by the project's full setup guide.
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-## What the project includes
+   Or, on Windows, double-click `cd-architectural-design-services/RUN-WEBSITE.bat`.
 
-- Minimal responsive architecture-services landing page and FAQ
-- Inspiration gallery with accessible lightbox
-- Guided client project brief, site and lot details, required spaces, preferences, budget, timeline, attachments, review and consent
-- Privacy notice, contact configuration, local test inbox, and Cloudflare Pages submission backend scaffolding
+4. Visit `http://127.0.0.1:5173` if the browser does not open automatically.
 
-## Important
+## What is included
 
-The ZIP upload is only needed for the initial import. Client data, uploaded inquiry files, passwords, and API secrets must not be committed to GitHub. Local inquiries are test-only and do not notify Ressian. A real public site still needs Cloudflare D1/R2 and email notification configuration plus testing before receiving clients.
+- Responsive architectural services landing page and FAQ
+- Image reference gallery
+- Guided multi-step client project brief with lot/site measurements, room requirements, design references, budget, timeline, attachments, review, and consent
+- Privacy-notice page
+- Local-only demo inquiry inbox
+- Cloudflare Pages Functions, D1/R2 configuration template, and production form-submission scaffolding
+- Function checklist and deployment instructions in the project's own README
+
+## Deployment
+
+When connecting the repository to Cloudflare Pages, set the **Root directory** to `cd-architectural-design-services`. Configure D1, R2, and Resend using the instructions in that folder's README before accepting real inquiries.
+
+The project folder and its local run steps are documented in the nested README. Local demo form submissions are not sent to Ressian. Never commit customer inquiry data or API secrets.
