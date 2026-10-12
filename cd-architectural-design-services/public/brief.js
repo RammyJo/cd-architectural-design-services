@@ -206,7 +206,7 @@
     if (selectedFiles.length) selectedFiles.forEach((file) => lines.push(`- ${file.name} (${formatFileSize(file.size)})`));
     else lines.push('- No files selected');
     lines.push('', 'Note: the text copy lists attachment names only. It does not contain the actual files.');
-    return lines.join('\\n');
+    return lines.join('\n');
   };
 
   if (downloadBriefButton) {
