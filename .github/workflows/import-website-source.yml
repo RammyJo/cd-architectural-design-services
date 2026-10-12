@@ -3,7 +3,7 @@ name: Import website source
 on:
   push:
     paths:
-      - "website-source.part*"
+      - "website-source.ready"
 
 permissions:
   contents: write
@@ -26,7 +26,7 @@ jobs:
           unzip -q /tmp/cd-website.zip -d /tmp/cd-website
           test -f /tmp/cd-website/cd-architectural-design-services/public/index.html
           cp -a /tmp/cd-website/cd-architectural-design-services/. .
-          rm -f website-source.part*
+          rm -f website-source.part* website-source.ready
 
       - name: Commit source files
         shell: bash
