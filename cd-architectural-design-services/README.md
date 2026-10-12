@@ -43,7 +43,7 @@ Those files stay on this computer and are excluded from Git. The success message
 
 ## Publish it later
 
-The normal `npm run dev` command is intentionally simple and does not require a Cloudflare database to preview the website. The real Cloudflare Pages submission backend is still included in `functions/api/submit.js`.
+The normal `npm run dev` command is intentionally simple and does not require a Cloudflare database to preview the website. `npm run build` produces the deployment bundle in `dist`, including Cloudflare's custom response headers. The real Cloudflare Pages submission backend is still included in `functions/api/submit.js`.
 
 For a real public site, configure Cloudflare D1 and R2 in `wrangler.jsonc`, set the business notification email, configure a Resend API key for email notifications, then use `npm run deploy`. Detailed deployment steps are below in the [Cloudflare setup section](#cloudflare-pages-setup). Do not deploy with placeholder database IDs or contact details.
 
@@ -66,7 +66,7 @@ npm run preview
 - `vite.config.js` — fast local development and local-only submission inbox
 - `functions/api/submit.js` — production Cloudflare Pages submission API
 - `schema.sql` — D1 table and indexes
-- `wrangler.jsonc` — Cloudflare Pages configuration template
+- `wrangler.jsonc` — Cloudflare Pages configuration template (build output: `dist`)
 
 ## Cloudflare Pages setup
 
