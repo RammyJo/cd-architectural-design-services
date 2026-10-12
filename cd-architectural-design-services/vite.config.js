@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import Busboy from 'busboy';
 import { randomUUID } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { resolve } from 'node:path';
 
@@ -194,6 +194,17 @@ function localInquiryInbox() {
   };
 }
 
+function copyCloudflareHeaders() {
+  return {
+    name: 'copy-cloudflare-headers',
+    async closeBundle() {
+      const outputDirectory = resolve(process.cwd(), 'dist');
+      await mkdir(outputDirectory, { recursive: true });
+      await copyFile(resolve(process.cwd(), 'public/_headers'), resolve(outputDirectory, '_headers'));
+    }
+  };
+}
+
 export default defineConfig({
   root: 'public',
   publicDir: false,
@@ -208,5 +219,5 @@ export default defineConfig({
       }
     }
   },
-  plugins: [localInquiryInbox()]
+  plugins: [localInquiryInbox(), copyCloudflareHeaders()]
 });
