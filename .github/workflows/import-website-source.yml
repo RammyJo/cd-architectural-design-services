@@ -3,7 +3,7 @@ name: Import website source
 on:
   push:
     paths:
-      - "website-source.zip"
+      - "website-source.part*"
 
 permissions:
   contents: write
@@ -17,14 +17,16 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Extract website project into the repository
+      - name: Rebuild and extract the project archive
         shell: bash
         run: |
           set -euo pipefail
-          unzip -q website-source.zip -d /tmp/cd-website
+          cat website-source.part* > /tmp/cd-website.zip.b64
+          base64 --decode /tmp/cd-website.zip.b64 > /tmp/cd-website.zip
+          unzip -q /tmp/cd-website.zip -d /tmp/cd-website
           test -f /tmp/cd-website/cd-architectural-design-services/public/index.html
           cp -a /tmp/cd-website/cd-architectural-design-services/. .
-          rm website-source.zip
+          rm -f website-source.part*
 
       - name: Commit source files
         shell: bash
