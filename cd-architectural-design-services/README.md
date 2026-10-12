@@ -15,7 +15,7 @@ Vite opens the website in your browser. If it doesn't open automatically, visit 
 
 On Windows, you can instead double-click **`RUN-WEBSITE.bat`**. It installs the dependencies the first time and starts the site for you. Keep the black terminal window open while using the site.
 
-#See [FUNCTION-AUDIT.md](./FUNCTION-AUDIT.md) for the full checklist of what is included, newly added, and still requires real business details or service configuration.
+See [FUNCTION-AUDIT.md](./FUNCTION-AUDIT.md) for the full checklist of what is included, newly added, and still requires real business details or service configuration.
 
 ## Included functions
 
