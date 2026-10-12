@@ -7,17 +7,11 @@
     {
       "binding": "CD_PROJECTS",
       "database_name": "cd-architectural-inquiries",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "CD_UPLOADS",
-      "bucket_name": "cd-architectural-inquiries"
+      "database_id": "aebbcc34-70ad-4f4a-8648-9cb2f0160aba"
     }
   ],
   "vars": {
-    "NOTIFY_EMAIL": "REPLACE_WITH_BUSINESS_EMAIL",
-    "FROM_EMAIL": "C + D Website <website@your-verified-domain.com>"
+    "NOTIFY_EMAIL": "",
+    "FROM_EMAIL": ""
   }
 }
