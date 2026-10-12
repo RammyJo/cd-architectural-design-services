@@ -1,34 +1,24 @@
 # C + D Architectural Design Services
 
-A minimal, responsive website promoting architectural design services, with a guided client project brief.
+Repository setup is ready. The website source is provided as a ZIP from the project handoff; one upload will expand it into editable website files in this repository.
 
-## Run locally
+## Complete the initial import (one-time)
 
-Requires Node.js 20.19+ or 22.12+.
+1. Download the `cd-architectural-design-services.zip` project archive from the ChatGPT conversation.
+2. Open [the repository's upload page](https://github.com/RammyJo/cd-architectural-design-services/upload/main).
+3. Upload the ZIP file to the repository root, keeping its filename exactly `cd-architectural-design-services.zip`.
+4. Commit the upload to `main`.
+5. Open the **Actions** tab and watch **Import website source**. It should extract the website into normal source files, remove the uploaded ZIP, and commit the imported files automatically.
 
-```bash
-npm install
-npm run dev
-```
+After that workflow succeeds, this repository will contain the complete website and this README will be replaced by the project's full setup guide.
 
-Open the local URL printed by Vite (usually http://127.0.0.1:5173). On Windows, you can also double-click `RUN-WEBSITE.bat`.
+## What the project includes
 
-## Features
+- Minimal responsive architecture-services landing page and FAQ
+- Inspiration gallery with accessible lightbox
+- Guided client project brief, site and lot details, required spaces, preferences, budget, timeline, attachments, review and consent
+- Privacy notice, contact configuration, local test inbox, and Cloudflare Pages submission backend scaffolding
 
-- Responsive marketing homepage and service overview
-- Architectural inspiration gallery with accessible image lightbox
-- FAQ and configurable contact / social links
-- Guided client inquiry with lot dimensions, site conditions, requested rooms, design preferences, budget, timing, attachments, and final review
-- Privacy notice
-- Local-only demo inbox for testing; demo submissions are not emailed
-- Cloudflare Pages Functions + D1/R2 submission backend scaffolding for production setup
+## Important
 
-## Project notes
-
-See [FUNCTION-AUDIT.md](./FUNCTION-AUDIT.md) for what is implemented and what still needs business details or configuration. Populate `public/site-config.js` only with contact details approved by Ressian. Do not commit passwords, API keys, or real customer data.
-
-## Before launch
-
-Configure Cloudflare D1 and R2, the notification email and Resend secret before accepting real public inquiries. Replace inspiration references with approved completed-project imagery only when available. Review the privacy notice for the actual business and data retention practices.
-
-The local preview was packaged and basic syntax/path checks were run. Verify `npm install`, `npm run build`, and real form submission in your environment before production launch.
+The ZIP upload is only needed for the initial import. Client data, uploaded inquiry files, passwords, and API secrets must not be committed to GitHub. Local inquiries are test-only and do not notify Ressian. A real public site still needs Cloudflare D1/R2 and email notification configuration plus testing before receiving clients.
