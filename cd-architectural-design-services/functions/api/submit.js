@@ -28,6 +28,14 @@ function asText(value, max = 3000) {
   return String(value).trim().slice(0, max);
 }
 
+function sniffContentType(bytes) {
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'image/jpeg';
+  if (bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47 && bytes[4] === 0x0d && bytes[5] === 0x0a && bytes[6] === 0x1a && bytes[7] === 0x0a) return 'image/png';
+  if (bytes.length >= 12 && String.fromCharCode(...bytes.subarray(0, 4)) === 'RIFF' && String.fromCharCode(...bytes.subarray(8, 12)) === 'WEBP') return 'image/webp';
+  if (bytes.length >= 5 && new TextDecoder().decode(bytes.subarray(0, 5)) === '%PDF-') return 'application/pdf';
+  return '';
+}
+
 function toBase64(bytes) {
   let binary = '';
   const chunkSize = 0x8000;
@@ -120,10 +128,14 @@ export async function onRequestPost({ request, env }) {
   if (totalBytes > MAX_TOTAL_BYTES) {
     return jsonResponse({ ok: false, error: 'The uploaded files exceed 10 MB in total. Please use smaller files and try again.' }, 413);
   }
+  const verifiedCandidates = [];
   for (const file of candidates) {
-    if (!ALLOWED_TYPES.has(file.type)) {
-      return jsonResponse({ ok: false, error: 'Unsupported file type. Please use JPG, PNG, WEBP, or PDF files.' }, 415);
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const detectedType = sniffContentType(bytes);
+    if (!detectedType || !ALLOWED_TYPES.has(detectedType) || (file.type && file.type !== detectedType)) {
+      return jsonResponse({ ok: false, error: 'One of the files is not a supported JPG, PNG, WEBP, or PDF. Please check the file and try again.' }, 415);
     }
+    verifiedCandidates.push({ file, bytes, detectedType });
   }
 
   const id = crypto.randomUUID();
@@ -132,16 +144,16 @@ export async function onRequestPost({ request, env }) {
   const uploadedKeys = [];
 
   try {
-    for (const file of candidates) {
+    for (const item of verifiedCandidates) {
+      const { file, bytes, detectedType } = item;
       const originalName = asText(file.name, 180) || 'reference';
       const key = `inquiries/${id}/${crypto.randomUUID()}-${safeFilename(originalName)}`;
-      const bytes = new Uint8Array(await file.arrayBuffer());
       await env.CD_UPLOADS.put(key, bytes, {
-        httpMetadata: { contentType: file.type || 'application/octet-stream' },
+        httpMetadata: { contentType: detectedType },
         customMetadata: { inquiryId: id, originalName: originalName.slice(0, 180) }
       });
       uploadedKeys.push(key);
-      storedFiles.push({ objectKey: key, originalName: originalName.slice(0, 180), contentType: file.type, size: file.size, bytes });
+      storedFiles.push({ objectKey: key, originalName: originalName.slice(0, 180), contentType: detectedType, size: file.size, bytes });
     }
 
     const attachmentRecord = storedFiles.map(({ objectKey, originalName, contentType: type, size }) => ({ objectKey, originalName, contentType: type, size }));
@@ -171,7 +183,7 @@ export async function onRequestPost({ request, env }) {
             from: env.FROM_EMAIL,
             to: [env.NOTIFY_EMAIL],
             reply_to: data.email,
-            subject: `New architectural inquiry: ${data.name}`,
+            subject: `New architectural inquiry: ${asText(data.name, 100).replace(/[\\r\\n\\t]+/g, ' ').replace(/\\s+/g, ' ')}`,
             text: summary,
             attachments: emailAttachments
           })
