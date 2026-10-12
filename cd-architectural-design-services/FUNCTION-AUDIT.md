@@ -31,6 +31,18 @@ This is a practical audit of common features for an architectural-services websi
 | Validation refinement | Added | Filled optional inputs such as numeric measurements are also checked for invalid values. |
 | Privacy notice page | Added as a draft | Must be reviewed against the real business identity, storage configuration, retention, and privacy process before launch. |
 | Better share/search metadata | Added | Open Graph tags, description tags, and basic structured service data. |
+| Attachment drag-and-drop and per-file removal | Added | Clients can drop pegs/references onto the upload area and remove individual files without clearing the entire selection. |
+| Upload size summary | Added | Shows selected file count and total size before submission, with a clear 12-file / 10 MB limit. |
+| Downloadable reviewed brief | Added | Clients can save a plain-text copy of form answers and attachment names before submitting; the actual attachments are not embedded in the text file. |
+| More accessible form progress | Added | Active step is exposed with `aria-current`, the progress bar announces its current percentage, and error states receive keyboard focus. |
+| Better mobile legibility | Added | Increased small text sizes, clarified checkbox cards, enlarged interactive targets, and improved upload/review controls for phones. |
+| Keyboard-friendly navigation | Added | Mobile navigation closes with Escape, closes after following a link or clicking outside, and resets when the viewport returns to desktop. |
+| Image loading fallback | Added | Remote architectural reference images show a designed fallback instead of a blank area if the image host is unavailable. |
+| Upload signature checking | Added | Production and local demo endpoints check the file's actual signature for JPG, PNG, WEBP, and PDF, not only the browser-provided MIME label. |
+| Inquiry email subject sanitization | Added | Removes line breaks and normalizes whitespace before using the client's name in the notification subject. |
+| Private local data defaults | Added | `.gitignore` excludes local inquiry records, uploads, dependencies, build output, and local environment secrets. |
+| Production output consistency | Added | The build copies Cloudflare's `_headers` into `dist`; Wrangler and the deploy script both target `dist`. |
+| Automated validation | Added | GitHub Actions checks JavaScript syntax, runs backend tests, builds the site, and verifies the security-header file is present. |
 
 ## Still needs real information or an external service
 
@@ -57,4 +69,5 @@ This is a practical audit of common features for an architectural-services websi
 3. Review/finalize `public/privacy.html` and the service descriptions.
 4. Configure Cloudflare D1, R2, verified email sender, Resend secret, and production anti-spam controls.
 5. Submit a test inquiry with and without files, confirm D1/R2 records and email delivery, and verify that a client never sees another client's inquiry.
-6. Test on a phone and a desktop browser before publishing the final URL.
+6. Run `npm run check`, `npm test`, and `npm run build`; confirm the GitHub Actions workflow passes.
+7. Test on a phone and a desktop browser before publishing the final URL.
