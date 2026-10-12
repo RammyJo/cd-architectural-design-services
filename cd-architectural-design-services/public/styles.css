@@ -578,3 +578,8 @@ body { font-size: 16px; line-height: 1.72; }
 @media (max-width: 600px) {
   .review-tools { align-items: flex-start; flex-direction: column; }
 }
+
+/* Temporary live-preview notice until secure submission and notification services are configured. */
+.setup-notice { margin: 18px 22px 0; padding: 13px 15px; border-left: 2px solid var(--clay); color: var(--ink-soft); background: #f4eee5; font-size: 12px; line-height: 1.7; }
+.setup-notice strong { color: var(--ink); }
+@media (max-width: 760px) { .setup-notice { margin: 12px 14px 0; font-size: 11px; } }
