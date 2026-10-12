@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cd-architectural-design-services",
+  "compatibility_date": "2026-10-12",
+  "pages_build_output_dir": "./public",
+  "d1_databases": [
+    {
+      "binding": "CD_PROJECTS",
+      "database_name": "cd-architectural-inquiries",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "CD_UPLOADS",
+      "bucket_name": "cd-architectural-inquiries"
+    }
+  ],
+  "vars": {
+    "NOTIFY_EMAIL": "REPLACE_WITH_BUSINESS_EMAIL",
+    "FROM_EMAIL": "C + D Website <website@your-verified-domain.com>"
+  }
+}

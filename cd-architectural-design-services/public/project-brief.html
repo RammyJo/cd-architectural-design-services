@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Share your property details, room requirements, design inspiration, and project goals with C + D Architectural Design Services.">
+  <title>Start a Project | C + D Architectural Design Services</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site-config.js" defer></script>
+  <script src="brief.js" defer></script>
+</head>
+<body class="brief-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-wrap container">
+      <a class="brand" href="index.html" aria-label="C plus D Architectural Design Services home"><span class="brand-mark" aria-hidden="true">C<span>+</span>D</span><span class="brand-name">ARCHITECTURAL<br>DESIGN SERVICES</span></a>
+      <a class="back-home" href="index.html"><span aria-hidden="true">←</span> Back to home</a>
+    </div>
+  </header>
+
+  <main id="main" class="brief-main">
+    <section class="brief-intro container">
+      <p class="eyebrow"><span class="eyebrow-line"></span> LET'S START WITH YOUR VISION</p>
+      <h1>Tell us what<br><em>you're imagining.</em></h1>
+      <p>It doesn't need to be perfect or fully figured out. Give us what you know today: your site, the spaces you need, your inspiration, and what matters most.</p>
+      <div class="brief-detail-line"><span><i aria-hidden="true"></i> About 5 minutes</span><span><i aria-hidden="true"></i> Add pegs, sketches, or site photos</span><span><i aria-hidden="true"></i> Save a draft in this browser session (uploads are not saved)</span></div>
+    </section>
+
+    <section class="brief-workspace container" aria-label="Project inquiry form">
+      <aside class="brief-sidebar">
+        <div class="sidebar-photo"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85" alt="Architectural interior with layered neutral materials" loading="lazy"><div class="sidebar-photo-caption">EVERY GOOD DESIGN STARTS WITH A CONVERSATION.</div></div>
+        <div class="sidebar-help"><span class="sidebar-small">A USEFUL NOTE</span><p>Measurements can be approximate. If your lot is irregular or you only have a title plan or sketch, upload it and explain what you know.</p><span class="sidebar-rule"></span><p class="sidebar-small">WHAT HAPPENS NEXT?</p><p>We'll review your brief and use the contact details you provide to discuss fit, scope, and next steps.</p></div>
+      </aside>
+
+      <div class="form-panel">
+        <div class="form-progress" aria-label="Form progress">
+          <div class="progress-top"><span id="step-count">STEP 01 OF 05</span><span id="step-percent">20% COMPLETE</span></div>
+          <div class="progress-track"><span id="progress-fill"></span></div>
+          <div class="progress-labels"><span class="active" data-progress-label="0">Your details</span><span data-progress-label="1">The property</span><span data-progress-label="2">Spaces</span><span data-progress-label="3">Design</span><span data-progress-label="4">Review</span></div>
+        </div>
+
+        <form id="project-form" novalidate>
+          <input class="bot-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <section class="form-step is-active" data-step="0" aria-labelledby="step-title-0">
+            <p class="step-kicker">FIRST, THE BASICS</p><h2 id="step-title-0">Who are we designing for?</h2><p class="step-description">Tell us how to reach you and where the project will be located.</p>
+            <div class="field-grid">
+              <div class="field field-full"><label for="client-name">Full name <span class="required-star">*</span></label><input id="client-name" name="name" type="text" autocomplete="name" placeholder="Your name" required maxlength="120"></div>
+              <div class="field"><label for="client-email">Email address <span class="required-star">*</span></label><input id="client-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254"></div>
+              <div class="field"><label for="client-phone">Mobile number</label><input id="client-phone" name="phone" type="tel" autocomplete="tel" placeholder="09XX XXX XXXX" maxlength="40"></div>
+              <div class="field"><label for="contact-preference">Preferred contact method</label><select id="contact-preference" name="contact_preference"><option value="Email">Email</option><option value="Phone call">Phone call</option><option value="Text message">Text message</option><option value="WhatsApp">WhatsApp</option><option value="Any">Any is fine</option></select></div>
+              <div class="field"><label for="project-type">What are you planning? <span class="required-star">*</span></label><select id="project-type" name="project_type" required><option value="">Choose a project type</option><option>New home</option><option>Renovation</option><option>Home extension</option><option>Interior / space planning</option><option>Small commercial space</option><option>Concept consultation</option><option>Other / not sure yet</option></select></div>
+              <div class="field field-full"><label for="project-location">Project location <span class="required-star">*</span></label><input id="project-location" name="project_location" type="text" placeholder="Barangay, city or municipality, province" required maxlength="220"><span class="field-hint">A general location is enough for now. Don't include sensitive personal information.</span></div>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="1" aria-labelledby="step-title-1" hidden>
+            <p class="step-kicker">UNDERSTAND THE SITE</p><h2 id="step-title-1">Tell us about the property.</h2><p class="step-description">Approximate measurements are welcome. If you don't know a figure yet, leave it blank.</p>
+            <div class="field-grid">
+              <div class="field"><label for="lot-area">Total lot area (m²)</label><input id="lot-area" name="lot_area_sqm" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 150"><span class="field-hint">From a title, survey, or estimate.</span></div>
+              <div class="field"><label for="lot-shape">Lot shape</label><select id="lot-shape" name="lot_shape"><option value="Not sure">Not sure</option><option>Regular / rectangular</option><option>Corner lot</option><option>Irregular shape</option><option>Sloping / uneven</option><option>Other</option></select></div>
+              <div class="field"><label for="lot-width">Approx. lot frontage (m)</label><input id="lot-width" name="lot_width_m" type="number" min="0" step="0.01" placeholder="e.g. 10"></div>
+              <div class="field"><label for="lot-depth">Approx. lot depth (m)</label><input id="lot-depth" name="lot_depth_m" type="number" min="0" step="0.01" placeholder="e.g. 15"></div>
+              <div class="field"><label for="storeys">Preferred number of storeys</label><select id="storeys" name="storeys"><option value="Not sure">Not sure</option><option>Single storey</option><option>Two storeys</option><option>Three storeys</option><option>More than three</option></select></div>
+              <div class="field"><label for="floor-area">Target floor area (m²)</label><input id="floor-area" name="target_floor_area_sqm" type="number" min="0" step="0.01" placeholder="If known"></div>
+              <div class="field field-full"><label>What best describes the site?</label><div class="choice-grid choice-grid-two"><label class="choice-card"><input type="checkbox" name="site_conditions" value="Vacant lot"><span>Vacant lot</span></label><label class="choice-card"><input type="checkbox" name="site_conditions" value="Existing home"><span>Existing home</span></label><label class="choice-card"><input type="checkbox" name="site_conditions" value="Existing structure to renovate"><span>Structure to renovate</span></label><label class="choice-card"><input type="checkbox" name="site_conditions" value="Newly acquired / checking options"><span>Still checking options</span></label><label class="choice-card"><input type="checkbox" name="site_conditions" value="Sloping ground"><span>Sloping ground</span></label><label class="choice-card"><input type="checkbox" name="site_conditions" value="Other site condition"><span>Other condition</span></label></div></div>
+              <div class="field field-full"><label for="site-notes">Any known site details? (optional)</label><textarea id="site-notes" name="site_notes" rows="3" maxlength="1500" placeholder="Road access, lot orientation, slope, drainage, existing trees, views, or restrictions you already know about."></textarea></div>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="2" aria-labelledby="step-title-2" hidden>
+            <p class="step-kicker">SHAPE THE BRIEF</p><h2 id="step-title-2">What spaces do you need?</h2><p class="step-description">Select the areas you have in mind. You can add, remove, or clarify anything in the notes.</p>
+            <div class="rooms-block"><div class="rooms-heading"><label>Spaces to consider</label><span>Select all that apply</span></div>
+              <div class="choice-grid">
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Living area"><span>Living area</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Dining area"><span>Dining area</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Main kitchen"><span>Main kitchen</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Dirty kitchen"><span>Dirty kitchen</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Bedrooms"><span>Bedrooms</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Bathrooms"><span>Bathrooms</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Guest room"><span>Guest room</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Home office / study"><span>Home office / study</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Laundry / utility"><span>Laundry / utility</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Storage room"><span>Storage room</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Garage / parking"><span>Garage / parking</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Balcony / terrace"><span>Balcony / terrace</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Lanai / outdoor living"><span>Lanai / outdoor living</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Garden / courtyard"><span>Garden / courtyard</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Helper's room"><span>Helper's room</span></label>
+                <label class="choice-card"><input type="checkbox" name="spaces" value="Elder-friendly / accessible features"><span>Elder-friendly features</span></label>
+              </div>
+            </div>
+            <div class="field-grid field-grid-compact">
+              <div class="field"><label for="bedrooms">How many bedrooms?</label><select id="bedrooms" name="bedrooms"><option value="Not decided">Not decided</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 or more</option></select></div>
+              <div class="field"><label for="bathrooms">How many bathrooms?</label><select id="bathrooms" name="bathrooms"><option value="Not decided">Not decided</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5 or more</option></select></div>
+              <div class="field field-full"><label for="other-spaces">Other spaces or room details</label><textarea id="other-spaces" name="other_spaces" rows="3" placeholder="e.g. prayer room, pantry, music room, two-car parking..." maxlength="1500"></textarea></div>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="3" aria-labelledby="step-title-3" hidden>
+            <p class="step-kicker">THE FEELING & THE PRACTICALS</p><h2 id="step-title-3">Help us understand your priorities.</h2><p class="step-description">Share the design direction, budget, timing, and references that will help frame the conversation.</p>
+            <div class="field-grid">
+              <div class="field field-full"><label>Which style directions appeal to you?</label><div class="choice-grid choice-grid-two style-choices"><label class="choice-card"><input type="checkbox" name="style_preferences" value="Modern tropical"><span>Modern tropical</span></label><label class="choice-card"><input type="checkbox" name="style_preferences" value="Warm minimalist"><span>Warm minimalist</span></label><label class="choice-card"><input type="checkbox" name="style_preferences" value="Contemporary"><span>Contemporary</span></label><label class="choice-card"><input type="checkbox" name="style_preferences" value="Classic / timeless"><span>Classic / timeless</span></label><label class="choice-card"><input type="checkbox" name="style_preferences" value="Industrial"><span>Industrial</span></label><label class="choice-card"><input type="checkbox" name="style_preferences" value="Still exploring"><span>Still exploring</span></label></div></div>
+              <div class="field"><label for="budget">Estimated construction budget</label><select id="budget" name="construction_budget"><option value="Not sure yet">Not sure yet</option><option>Below ₱1 million</option><option>₱1 million–₱2 million</option><option>₱2 million–₱4 million</option><option>₱4 million–₱6 million</option><option>₱6 million–₱10 million</option><option>Above ₱10 million</option></select><span class="field-hint">This helps set realistic design priorities; it is not a quotation.</span></div>
+              <div class="field"><label for="timeline">When would you like to begin?</label><select id="timeline" name="target_timeline"><option value="Flexible / exploring">Flexible / exploring</option><option>As soon as practical</option><option>Within 1–3 months</option><option>Within 3–6 months</option><option>Within 6–12 months</option><option>More than a year from now</option></select></div>
+              <div class="field field-full"><label>What matters most in the design?</label><div class="priority-pills"><label><input type="checkbox" name="priorities" value="Natural light"><span>Natural light</span></label><label><input type="checkbox" name="priorities" value="Ventilation"><span>Ventilation</span></label><label><input type="checkbox" name="priorities" value="Privacy"><span>Privacy</span></label><label><input type="checkbox" name="priorities" value="Low maintenance"><span>Low maintenance</span></label><label><input type="checkbox" name="priorities" value="Future expansion"><span>Future expansion</span></label><label><input type="checkbox" name="priorities" value="Energy efficiency"><span>Energy efficiency</span></label><label><input type="checkbox" name="priorities" value="Family connection"><span>Family connection</span></label><label><input type="checkbox" name="priorities" value="Outdoor living"><span>Outdoor living</span></label></div></div>
+              <div class="field field-full"><label for="vision-notes">Anything else we should understand?</label><textarea id="vision-notes" name="vision_notes" rows="4" placeholder="Tell us about your household, routines, must-haves, concerns, or ideas you don't want to lose." maxlength="3000"></textarea></div>
+            </div>
+            <div class="upload-panel">
+              <div class="upload-heading"><span class="upload-icon" aria-hidden="true">＋</span><div><h3>Upload your pegs & site references</h3><p>Inspiration images, Pinterest screenshots, sketches, floor plans, lot plans, and site photos.</p></div></div>
+              <label class="upload-drop" for="attachments"><span class="upload-cloud" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 21V7m0 0-5 5m5-5 5 5M7 20v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Choose files to upload</strong><span>JPG, PNG, WEBP, or PDF · Up to 12 files · 10 MB total</span><input id="attachments" name="attachments" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" multiple></label>
+              <ul class="file-list" id="file-list" aria-live="polite"></ul>
+              <p class="field-hint">Only share documents and images you have permission to send. Please avoid IDs, financial documents, or other sensitive personal records.</p>
+            </div>
+          </section>
+
+
+          <section class="form-step review-step" data-step="4" aria-labelledby="step-title-4" hidden>
+            <p class="step-kicker">ONE LAST LOOK</p><h2 id="step-title-4">Review your project brief.</h2>
+            <p class="step-description">Check the summary before sending. Use the edit buttons to return to any section. You can still change your answers.</p>
+            <div id="review-summary" class="review-summary" aria-live="polite"></div>
+            <div class="review-attachments" id="review-attachments"><strong>Attached references</strong><p>No files selected.</p></div>
+            <div class="consent-line"><label><input id="consent" name="consent" type="checkbox" value="yes" required><span>I agree that C + D Architectural Design Services may use these details and files to review my project inquiry and contact me about it. Read the <a href="privacy.html" target="_blank" rel="noopener noreferrer">privacy notice</a>. <span class="required-star">*</span></span></label></div>
+          </section>
+
+          <div class="form-error" id="form-error" role="alert" hidden></div>
+          <div class="form-actions"><button class="button button-quiet" type="button" id="prev-step" hidden><span aria-hidden="true">←</span> Back</button><span class="draft-status" id="draft-status" aria-live="polite">Your progress saves on this device; uploads do not.</span><button class="draft-clear" type="button" id="clear-draft">Clear draft</button><button class="button button-dark" type="button" id="next-step">Continue <span aria-hidden="true">→</span></button><button class="button button-dark" type="submit" id="submit-brief" hidden>Send project brief <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <section class="success-panel" id="success-panel" hidden aria-live="polite"><div class="success-mark" aria-hidden="true">✓</div><p class="eyebrow">BRIEF SUBMITTED</p><h2>Your idea has<br><em>a starting point.</em></h2><p id="success-message">Thank you. Your project brief has been received.</p><a class="button button-dark" href="index.html">Return to C + D home <span aria-hidden="true">↗</span></a></section>
+      </div>
+    </section>
+    <section class="privacy-note container"><span aria-hidden="true">●</span><p>Your information is intended for project review by C + D Architectural Design Services. Do not upload confidential documents or information unrelated to the design inquiry.</p></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom brief-footer"><span>© <span id="year"></span> C + D Architectural Design Services</span><a href="privacy.html">Privacy notice</a><a href="index.html">Back to home</a><span>DESIGNED AROUND WHAT MATTERS</span></div></footer>
+</body>
+</html>
