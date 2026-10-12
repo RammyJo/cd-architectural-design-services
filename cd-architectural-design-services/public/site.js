@@ -132,6 +132,16 @@
     });
   }
 
+  // Provide a composed fallback if an external reference image cannot load.
+  document.querySelectorAll('.hero-image-frame img, .direction-card img').forEach((img) => {
+    img.addEventListener('error', () => {
+      const frame = img.closest('.hero-image-frame, .direction-card');
+      if (!frame) return;
+      frame.classList.add('image-unavailable');
+      frame.dataset.imageFallback = img.closest('.direction-card')?.querySelector('h3')?.textContent || 'Architectural design inspiration';
+    }, { once: true });
+  });
+
   const revealTargets = document.querySelectorAll('.service-card, .direction-card, .process-step');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const observer = new IntersectionObserver((entries, activeObserver) => {
