@@ -1,20 +1,41 @@
 (() => {
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#primary-nav');
+  const navWrap = document.querySelector('.nav-wrap');
+  const closeMenu = () => {
+    if (!menuToggle || !nav) return;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open navigation');
+    nav.classList.remove('is-open');
+    document.body.classList.remove('menu-open');
+  };
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', () => {
       const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!expanded));
-      menuToggle.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-      nav.classList.toggle('is-open', !expanded);
-      document.body.classList.toggle('menu-open', !expanded);
+      if (expanded) {
+        closeMenu();
+      } else {
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Close navigation');
+        nav.classList.add('is-open');
+        document.body.classList.add('menu-open');
+        const firstLink = nav.querySelector('a');
+        if (firstLink && window.matchMedia('(max-width: 1050px)').matches) firstLink.focus({ preventScroll: true });
+      }
     });
-    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Open navigation');
-      nav.classList.remove('is-open');
-      document.body.classList.remove('menu-open');
-    }));
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        menuToggle.focus({ preventScroll: true });
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (menuToggle.getAttribute('aria-expanded') === 'true' && navWrap && !navWrap.contains(event.target)) closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1050) closeMenu();
+    }, { passive: true });
   }
   const year = document.querySelector('#year');
   if (year) year.textContent = new Date().getFullYear();
@@ -74,6 +95,7 @@
 
   // Open reference photography in a small native dialog; completed C + D work is not implied.
   const referenceImages = document.querySelectorAll('.direction-card img');
+  referenceImages.forEach((img) => { img.decoding = 'async'; });
   if (referenceImages.length && 'HTMLDialogElement' in window) {
     const dialog = document.createElement('dialog');
     dialog.className = 'image-lightbox';
