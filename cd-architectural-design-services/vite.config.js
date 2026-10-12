@@ -214,6 +214,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(process.cwd(), 'public/index.html'),
+        approach: resolve(process.cwd(), 'public/approach.html'),
+        services: resolve(process.cwd(), 'public/services.html'),
+        directions: resolve(process.cwd(), 'public/design-directions.html'),
+        process: resolve(process.cwd(), 'public/process.html'),
+        faq: resolve(process.cwd(), 'public/faq.html'),
+        contact: resolve(process.cwd(), 'public/contact.html'),
         brief: resolve(process.cwd(), 'public/project-brief.html'),
         privacy: resolve(process.cwd(), 'public/privacy.html')
       }
