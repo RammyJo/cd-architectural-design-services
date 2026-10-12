@@ -50,6 +50,7 @@
     const percent = Math.round(((currentStep + 1) / steps.length) * 100);
     percentLabel.textContent = `${percent}% COMPLETE`;
     fill.style.width = `${percent}%`;
+    fill.parentElement.setAttribute('aria-valuenow', String(percent));
     progressLabels.forEach((label, index) => {
       label.classList.toggle('active', index === currentStep);
       label.classList.toggle('done', index < currentStep);
@@ -220,21 +221,19 @@
     const files = Array.from(fileInput.files || []);
     const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
     if (files.length > 12) {
-      setError('Please upload no more than 12 files.');
-      fileInput.value = '';
-      renderFiles();
+      setError('Please upload no more than 12 files. Remove the extra files below to continue.');
       return false;
     }
-    if (files.some((file) => !allowedTypes.has(file.type))) {
-      setError('One or more files use an unsupported format. Please upload JPG, PNG, WEBP, or PDF files.');
-      fileInput.value = '';
-      renderFiles();
+    if (files.some((file) => file.size === 0)) {
+      setError('One of the selected files is empty or unreadable. Remove it or choose another file.');
+      return false;
+    }
+    if (files.some((file) => !allowedTypes.has(file.type) && !(!file.type && /\\.(jpe?g|png|webp|pdf)$/i.test(file.name)))) {
+      setError('One or more files use an unsupported format. Please use JPG, PNG, WEBP, or PDF files, then remove any unsupported files below.');
       return false;
     }
     if (totalBytes > MAX_BYTES) {
-      setError('Your files are larger than 10 MB in total. Please remove some files or upload smaller versions.');
-      fileInput.value = '';
-      renderFiles();
+      setError('Your files are larger than 10 MB in total. Remove one or more files or choose smaller versions.');
       return false;
     }
     return true;
@@ -305,6 +304,11 @@
 
   nextButton.addEventListener('click', () => {
     if (!validateCurrentStep()) return;
+    if (currentStep === 3 && !validateFiles()) {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      fileList.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      return;
+    }
     saveDraft();
     currentStep = Math.min(currentStep + 1, steps.length - 1);
     updateProgress();
@@ -330,8 +334,40 @@
   });
   fileInput.addEventListener('change', () => {
     setError('');
-    if (validateFiles()) renderFiles();
+    validateFiles();
+    renderFiles();
   });
+
+  const uploadDrop = form.querySelector('.upload-drop');
+  if (uploadDrop) {
+    uploadDrop.addEventListener('dragover', (event) => {
+      if (!event.dataTransfer || !Array.from(event.dataTransfer.types || []).includes('Files')) return;
+      event.preventDefault();
+      uploadDrop.classList.add('is-dragging');
+      if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
+    });
+    uploadDrop.addEventListener('dragleave', (event) => {
+      if (!uploadDrop.contains(event.relatedTarget)) uploadDrop.classList.remove('is-dragging');
+    });
+    uploadDrop.addEventListener('drop', (event) => {
+      if (!event.dataTransfer || !event.dataTransfer.files?.length) return;
+      event.preventDefault();
+      uploadDrop.classList.remove('is-dragging');
+      if (typeof DataTransfer === 'undefined') {
+        setError('Drag-and-drop is not supported by this browser. Please use Choose files to upload.');
+        return;
+      }
+      const transfer = new DataTransfer();
+      Array.from(fileInput.files || []).forEach((file) => transfer.items.add(file));
+      Array.from(event.dataTransfer.files).forEach((file) => transfer.items.add(file));
+      fileInput.files = transfer.files;
+      setError('');
+      validateFiles();
+      renderFiles();
+      renderReviewSummary();
+      saveDraft();
+    });
+  }
 
   if (reviewSummary) {
     reviewSummary.addEventListener('click', (event) => {
