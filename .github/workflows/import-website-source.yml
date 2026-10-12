@@ -41,3 +41,6 @@ jobs:
 
       - name: Build website
         run: npm run build
+
+      - name: Verify Cloudflare headers are in the deploy output
+        run: test -f dist/_headers
