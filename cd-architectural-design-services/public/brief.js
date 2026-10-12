@@ -14,6 +14,7 @@
   const draftStatus = document.querySelector('#draft-status');
   const fileInput = document.querySelector('#attachments');
   const fileList = document.querySelector('#file-list');
+  const uploadSummary = document.querySelector('#upload-summary');
   const successPanel = document.querySelector('#success-panel');
   const successMessage = document.querySelector('#success-message');
   const reviewSummary = document.querySelector('#review-summary');
@@ -25,6 +26,13 @@
   let isSubmitting = false;
   let draftTimer;
   const DRAFT_KEY = 'cd-architectural-project-brief-v1';
+
+  const scrollToForm = () => {
+    const panel = document.querySelector('.form-panel');
+    if (!panel) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  };
 
   const setError = (message) => {
     errorBox.textContent = message;
@@ -45,6 +53,8 @@
     progressLabels.forEach((label, index) => {
       label.classList.toggle('active', index === currentStep);
       label.classList.toggle('done', index < currentStep);
+      if (index === currentStep) label.setAttribute('aria-current', 'step');
+      else label.removeAttribute('aria-current');
     });
     if (currentStep === steps.length - 1) renderReviewSummary();
     prevButton.hidden = currentStep === 0;
@@ -230,17 +240,53 @@
     return true;
   };
 
+  const formatFileSize = (bytes) => bytes < 1024 * 1024
+    ? `${Math.max(1, Math.round(bytes / 1024))} KB`
+    : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+
+  const removeFile = (removeIndex) => {
+    const currentFiles = Array.from(fileInput.files || []);
+    if (!currentFiles[removeIndex]) return;
+    if (typeof DataTransfer === 'undefined') {
+      setError('This browser cannot remove one attachment at a time. Re-select the files you want to keep.');
+      return;
+    }
+    const transfer = new DataTransfer();
+    currentFiles.forEach((file, index) => { if (index !== removeIndex) transfer.items.add(file); });
+    fileInput.files = transfer.files;
+    setError('');
+    renderFiles();
+    renderReviewSummary();
+    saveDraft();
+  };
+
   const renderFiles = () => {
+    const selectedFiles = Array.from(fileInput.files || []);
     fileList.replaceChildren();
-    Array.from(fileInput.files || []).forEach((file) => {
+    selectedFiles.forEach((file, index) => {
       const item = document.createElement('li');
+      item.className = 'file-item';
       const name = document.createElement('span');
+      name.className = 'file-name';
       name.textContent = file.name;
       const size = document.createElement('small');
-      size.textContent = file.size < 1024 * 1024 ? `${Math.max(1, Math.round(file.size / 1024))} KB` : `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
-      item.append(name, size);
+      size.className = 'file-size';
+      size.textContent = formatFileSize(file.size);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'file-remove';
+      remove.textContent = 'Remove';
+      remove.setAttribute('aria-label', `Remove attachment ${file.name}`);
+      remove.addEventListener('click', () => removeFile(index));
+      item.append(name, size, remove);
       fileList.append(item);
     });
+    if (uploadSummary) {
+      const totalBytes = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+      uploadSummary.textContent = selectedFiles.length
+        ? `${selectedFiles.length} ${selectedFiles.length === 1 ? 'file' : 'files'} selected · ${formatFileSize(totalBytes)} of 10 MB`
+        : 'No files selected. You can submit the brief without attachments.';
+    }
   };
 
   const readPrefill = () => {
@@ -262,7 +308,7 @@
     saveDraft();
     currentStep = Math.min(currentStep + 1, steps.length - 1);
     updateProgress();
-    document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToForm();
     const heading = steps[currentStep].querySelector('h2');
     if (heading) heading.setAttribute('tabindex', '-1'), heading.focus({ preventScroll: true });
   });
@@ -270,7 +316,7 @@
   prevButton.addEventListener('click', () => {
     currentStep = Math.max(currentStep - 1, 0);
     updateProgress();
-    document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToForm();
   });
 
   form.addEventListener('input', () => {
@@ -295,7 +341,7 @@
       if (!Number.isInteger(targetStep) || targetStep < 0 || targetStep >= steps.length - 1) return;
       currentStep = targetStep;
       updateProgress();
-      document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToForm();
       const heading = steps[currentStep].querySelector('h2');
       if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
     });
@@ -305,6 +351,7 @@
     clearDraftButton.addEventListener('click', () => {
       const shouldClear = window.confirm('Clear this project brief and remove its saved draft from this browser session?');
       if (!shouldClear) return;
+      window.clearTimeout(draftTimer);
       form.reset();
       fileInput.value = '';
       try { sessionStorage.removeItem(DRAFT_KEY); } catch (_) { /* Storage is optional. */ }
@@ -325,7 +372,7 @@
       currentStep = index;
       updateProgress();
       if (!validateCurrentStep()) {
-        document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToForm();
         const invalid = steps[index].querySelector(':invalid');
         if (invalid) invalid.focus({ preventScroll: false });
         return;
@@ -361,9 +408,13 @@
           ? 'Your brief has been saved, but the studio notification could not be confirmed. Please contact C + D directly to verify receipt.'
           : 'Thank you. Your project brief has been received. C + D can now review your notes and references.';
       try { sessionStorage.removeItem(DRAFT_KEY); } catch (_) { /* Storage is optional. */ }
-      successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      successPanel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     } catch (error) {
       setError(`${error.message} If this website has just been installed, the submission service may not be connected yet.`);
+      errorBox.setAttribute('tabindex', '-1');
+      errorBox.focus({ preventScroll: true });
+      errorBox.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
       submitButton.disabled = false;
       submitButton.innerHTML = 'Send project brief <span aria-hidden="true">↗</span>';
     } finally {
@@ -371,7 +422,8 @@
     }
   });
 
-  restoreDraft();
   readPrefill();
+  restoreDraft();
+  renderFiles();
   updateProgress();
 })();
