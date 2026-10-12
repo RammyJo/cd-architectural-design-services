@@ -228,7 +228,7 @@
       setError('One of the selected files is empty or unreadable. Remove it or choose another file.');
       return false;
     }
-    if (files.some((file) => !allowedTypes.has(file.type) && !(!file.type && /\\.(jpe?g|png|webp|pdf)$/i.test(file.name)))) {
+    if (files.some((file) => !allowedTypes.has(file.type) && !(!file.type && /\.(jpe?g|png|webp|pdf)$/i.test(file.name)))) {
       setError('One or more files use an unsupported format. Please use JPG, PNG, WEBP, or PDF files, then remove any unsupported files below.');
       return false;
     }
