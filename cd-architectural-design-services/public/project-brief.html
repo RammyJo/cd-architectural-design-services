@@ -17,8 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="site-config.js" defer></script>
-  <script src="brief.js" defer></script>
+  <script type="module" src="site-config.js"></script>
+  <script type="module" src="brief.js"></script>
 </head>
 <body class="brief-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -44,6 +44,7 @@
       </aside>
 
       <div class="form-panel">
+        <div class="setup-notice" role="status"><strong>Preview site:</strong> online inquiry delivery is still being configured. Please do not enter real client or project information yet. You can review the form and download a sample brief copy.</div>
         <div class="form-progress" aria-label="Form progress">
           <div class="progress-top"><span id="step-count">STEP 01 OF 05</span><span id="step-percent">20% COMPLETE</span></div>
           <div class="progress-track" role="progressbar" aria-label="Project brief progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><span id="progress-fill"></span></div>
