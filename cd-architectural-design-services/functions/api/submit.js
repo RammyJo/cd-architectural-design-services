@@ -76,7 +76,10 @@ function readableSummary(data, storedFiles) {
 
 export async function onRequestPost({ request, env }) {
   if (!env.CD_PROJECTS || !env.CD_UPLOADS) {
-    return jsonResponse({ ok: false, error: 'The project submission service is not fully configured yet.' }, 503);
+    return jsonResponse({
+      ok: false,
+      error: 'Online project submissions are not enabled yet. Your details and attachments have not been saved. Please check back after the studio contact and secure file-storage setup is complete.'
+    }, 503);
   }
 
   const contentType = request.headers.get('content-type') || '';
