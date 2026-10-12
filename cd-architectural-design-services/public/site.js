@@ -154,4 +154,106 @@
     }, { threshold: 0.12 });
     revealTargets.forEach((target) => { target.classList.add('will-reveal'); observer.observe(target); });
   }
+
+  // Keep the studio's main information on separate pages, with a clear next step.
+  const pageSequence = [
+    { file: 'index.html', title: 'Home', description: 'Meet the studio and its design philosophy.' },
+    { file: 'approach.html', title: 'Our approach', description: 'See how the project conversation begins.' },
+    { file: 'services.html', title: 'Services', description: 'Explore the kinds of work the studio discusses.' },
+    { file: 'design-directions.html', title: 'Design directions', description: 'Browse illustrative ideas for mood, form, and materials.' },
+    { file: 'process.html', title: 'Process', description: 'Understand the first steps from idea to project scope.' },
+    { file: 'faq.html', title: 'FAQ', description: 'Find answers to common questions before reaching out.' },
+    { file: 'contact.html', title: 'Contact', description: 'Review how to get in touch and prepare an inquiry.' },
+    { file: 'project-brief.html', title: 'Start a project', description: 'Build a project brief one step at a time.' }
+  ];
+  const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
+  // Highlight the current destination in the desktop/mobile menu where it exists.
+  document.querySelectorAll('.primary-nav a[href]').forEach((link) => {
+    try {
+      const targetFile = (new URL(link.getAttribute('href'), window.location.href).pathname.split('/').pop() || 'index.html').toLowerCase();
+      if (targetFile === currentFile) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    } catch (_) { /* Ignore a malformed optional navigation URL. */ }
+  });
+
+  const sequenceIndex = pageSequence.findIndex((page) => page.file === currentFile);
+  const siteFooter = document.querySelector('.site-footer');
+  if (sequenceIndex >= 0 && siteFooter && !document.querySelector('.page-sequence-nav')) {
+    const sequenceNav = document.createElement('nav');
+    sequenceNav.className = 'page-sequence-nav';
+    sequenceNav.setAttribute('aria-label', 'Previous and next pages');
+
+    const top = document.createElement('div');
+    top.className = 'page-sequence-top';
+    const meta = document.createElement('p');
+    meta.className = 'page-sequence-meta';
+    meta.textContent = `PAGE ${String(sequenceIndex + 1).padStart(2, '0')} / ${String(pageSequence.length).padStart(2, '0')}`;
+    const current = document.createElement('p');
+    current.className = 'page-sequence-current';
+    current.textContent = pageSequence[sequenceIndex].title;
+    top.append(meta, current);
+
+    const progressTrack = document.createElement('div');
+    progressTrack.className = 'page-sequence-progress';
+    progressTrack.setAttribute('aria-hidden', 'true');
+    const progressFill = document.createElement('span');
+    progressFill.style.width = `${((sequenceIndex + 1) / pageSequence.length) * 100}%`;
+    progressTrack.append(progressFill);
+
+    const links = document.createElement('div');
+    links.className = 'page-sequence-links';
+
+    const makePageLink = (page, direction) => {
+      const link = document.createElement('a');
+      link.href = page.file;
+      link.className = direction === 'next' ? 'page-sequence-next' : 'page-sequence-prev';
+      link.setAttribute('aria-label', `${direction === 'next' ? 'Next page' : 'Previous page'}: ${page.title}`);
+      const arrow = document.createElement('span');
+      arrow.className = 'page-sequence-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = direction === 'next' ? '→' : '←';
+      const copy = document.createElement('span');
+      copy.className = 'page-sequence-copy';
+      const label = document.createElement('span');
+      label.className = 'page-sequence-label';
+      label.textContent = direction === 'next' ? 'NEXT PAGE' : 'PREVIOUS PAGE';
+      const title = document.createElement('strong');
+      title.className = 'page-sequence-title';
+      title.textContent = page.title;
+      copy.append(label, title);
+      if (direction === 'next') link.append(copy, arrow);
+      else link.append(arrow, copy);
+      return link;
+    };
+
+    if (sequenceIndex > 0) {
+      links.append(makePageLink(pageSequence[sequenceIndex - 1], 'previous'));
+    } else {
+      const startNote = document.createElement('p');
+      startNote.className = 'page-sequence-note';
+      startNote.textContent = 'You are at the beginning. Use the menu or continue to the next page.';
+      links.append(startNote);
+    }
+
+    if (sequenceIndex < pageSequence.length - 1) {
+      links.append(makePageLink(pageSequence[sequenceIndex + 1], 'next'));
+    } else {
+      const endNote = document.createElement('p');
+      endNote.className = 'page-sequence-note is-end';
+      endNote.append(document.createTextNode('You have reached the end of the guide. '));
+      const homeLink = document.createElement('a');
+      homeLink.href = 'index.html';
+      homeLink.textContent = 'Return to home';
+      endNote.append(homeLink);
+      links.append(endNote);
+    }
+
+    sequenceNav.append(top, progressTrack, links);
+    siteFooter.parentNode.insertBefore(sequenceNav, siteFooter);
+  }
+
 })();
