@@ -19,6 +19,7 @@
   const successMessage = document.querySelector('#success-message');
   const reviewSummary = document.querySelector('#review-summary');
   const reviewAttachments = document.querySelector('#review-attachments');
+  const downloadBriefButton = document.querySelector('#download-brief');
   const clearDraftButton = document.querySelector('#clear-draft');
   const MAX_BYTES = 10 * 1024 * 1024;
   const allowedTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'application/pdf']);
@@ -181,6 +182,51 @@
       }
     }
   };
+
+  const createBriefCopy = () => {
+    const values = getFormValues();
+    const lines = [
+      'C + D ARCHITECTURAL DESIGN SERVICES',
+      'CLIENT PROJECT BRIEF',
+      `Prepared on: ${new Date().toLocaleDateString()}`,
+      '',
+      'This is a copy of the information entered in the inquiry form. It is not a quotation or a project agreement.',
+      ''
+    ];
+    reviewGroups.forEach((group) => {
+      lines.push(group.title.toUpperCase());
+      group.fields.forEach(([key, label]) => {
+        const value = prettyValue(values[key], key);
+        if (value) lines.push(`${label}: ${value}`);
+      });
+      lines.push('');
+    });
+    const selectedFiles = Array.from(fileInput.files || []);
+    lines.push('ATTACHED REFERENCES');
+    if (selectedFiles.length) selectedFiles.forEach((file) => lines.push(`- ${file.name} (${formatFileSize(file.size)})`));
+    else lines.push('- No files selected');
+    lines.push('', 'Note: the text copy lists attachment names only. It does not contain the actual files.');
+    return lines.join('\\n');
+  };
+
+  if (downloadBriefButton) {
+    downloadBriefButton.addEventListener('click', () => {
+      try {
+        const blob = new Blob([createBriefCopy()], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `cd-project-brief-${new Date().toISOString().slice(0, 10)}.txt`;
+        link.hidden = true;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (_) {
+        setError('Your browser could not create a local copy. You can still review your details here before submitting.');
+      }
+    });
+  }
 
   const saveDraft = () => {
     try {
