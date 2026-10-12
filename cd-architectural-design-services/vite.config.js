@@ -32,6 +32,14 @@ function asText(value, max = 3000) {
   return String(value).trim().slice(0, max);
 }
 
+function sniffContentType(bytes) {
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'image/jpeg';
+  if (bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47 && bytes[4] === 0x0d && bytes[5] === 0x0a && bytes[6] === 0x1a && bytes[7] === 0x0a) return 'image/png';
+  if (bytes.length >= 12 && bytes.toString('ascii', 0, 4) === 'RIFF' && bytes.toString('ascii', 8, 12) === 'WEBP') return 'image/webp';
+  if (bytes.length >= 5 && bytes.toString('ascii', 0, 5) === '%PDF-') return 'application/pdf';
+  return '';
+}
+
 async function parseMultipart(req) {
   const fields = {};
   const files = [];
@@ -131,9 +139,11 @@ function localInquiryInbox() {
         if (JSON.stringify(data).length > 25000) return json(res, 413, { ok: false, error: 'The text in this brief is too long. Please shorten your notes and try again.' });
         if (files.length > MAX_FILES || fileBytes > MAX_TOTAL_BYTES) return json(res, 413, { ok: false, error: 'Please upload no more than 12 files and keep them under 10 MB total.' });
         for (const file of files) {
-          if (!ALLOWED_TYPES.has(file.contentType)) {
-            return json(res, 415, { ok: false, error: 'Unsupported file type. Please use JPG, PNG, WEBP, or PDF files.' });
+          const detectedType = sniffContentType(file.buffer);
+          if (!detectedType || !ALLOWED_TYPES.has(detectedType) || (file.contentType !== 'application/octet-stream' && file.contentType !== detectedType)) {
+            return json(res, 415, { ok: false, error: 'One of the files is not a supported JPG, PNG, WEBP, or PDF. Please check the file and try again.' });
           }
+          file.contentType = detectedType;
         }
 
         const id = randomUUID();
