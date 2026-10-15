@@ -185,7 +185,11 @@ $('#download-summary').addEventListener('click',()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $('#contact-studio').addEventListener('click',()=>{
-  const text=encodeURIComponent(conceptText());
-  $('#contact-studio').href='project-brief.html?source=home-builder&concept='+text;
+  try { sessionStorage.setItem('cd-home-builder-concept-v1', JSON.stringify({
+    concept: conceptText(), location: state.location, lotArea: state.lotArea,
+    floorArea: state.floorArea, storeys: state.storeys, style: state.style,
+    finish: state.finish, rooms: [...state.rooms]
+  })); } catch (_) { /* Continue to the brief even if storage is unavailable. */ }
+  $('#contact-studio').href='project-brief.html?source=home-builder&type=new-home';
 });
 update();
