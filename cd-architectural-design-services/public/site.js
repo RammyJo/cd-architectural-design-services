@@ -155,6 +155,45 @@
     revealTargets.forEach((target) => { target.classList.add('will-reveal'); observer.observe(target); });
   }
 
+
+  // A small, optional project chooser helps visitors start from their own situation.
+  const personalizePanel = document.querySelector('[data-personalize]');
+  if (personalizePanel) {
+    const choices = Array.from(personalizePanel.querySelectorAll('[data-project-type]'));
+    const message = personalizePanel.querySelector('#personalize-message');
+    const cta = personalizePanel.querySelector('[data-personalize-cta]');
+    const messages = {
+      'new-home': 'We will start with the site, the people who will live there, and what a good day at home looks like for you.',
+      renovation: 'We will look at what already works, what feels difficult, and what you would like the home to do better.',
+      'space-planning': 'We will start with how the room is used, how it should feel, and what needs to change.',
+      consultation: 'That is a perfectly good starting point. Begin with what you know; the brief will help you find the next question.'
+    };
+    const updateChoice = (chosen) => {
+      choices.forEach((choice) => {
+        const active = choice === chosen;
+        choice.setAttribute('aria-checked', String(active));
+        choice.setAttribute('aria-pressed', String(active));
+      });
+      const type = chosen ? chosen.dataset.projectType : '';
+      if (message) message.textContent = type ? messages[type] : 'Choose the closest match. You do not need to have everything figured out before you begin.';
+      if (cta) cta.href = type ? `project-brief.html?type=${encodeURIComponent(type)}` : 'project-brief.html';
+    };
+    choices.forEach((choice, index) => {
+      choice.addEventListener('click', () => updateChoice(choice));
+      choice.addEventListener('keydown', (event) => {
+        if (!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = choices.length - 1;
+        else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % choices.length;
+        else nextIndex = (index - 1 + choices.length) % choices.length;
+        choices[nextIndex].focus();
+        updateChoice(choices[nextIndex]);
+      });
+    });
+  }
+
   // Keep the studio's main information on separate pages, with a clear next step.
   const pageSequence = [
     { file: 'index.html', title: 'Home', description: 'Meet the studio and its design philosophy.' },
