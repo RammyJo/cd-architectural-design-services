@@ -14,17 +14,19 @@
 <aside class="left-panel">
 <div class="panel-head"><span class="step">01</span><div><h1>Build your home</h1><p>Think in pieces. Make it yours.</p></div></div>
 <div class="section"><div class="section-title"><span>ADD PIECES</span><small>DRAG INTO THE LOT</small></div><div class="piece-grid">
-<button class="piece" draggable="true" data-piece="room"><span class="piece-art room-art"></span><b>Room</b><small>4 × 4 m</small></button>
-<button class="piece" draggable="true" data-piece="living"><span class="piece-art living-art"></span><b>Living area</b><small>6 × 5 m</small></button>
-<button class="piece" draggable="true" data-piece="bedroom"><span class="piece-art bed-art"></span><b>Bedroom</b><small>4 × 4 m</small></button>
-<button class="piece" draggable="true" data-piece="kitchen"><span class="piece-art kitchen-art"></span><b>Kitchen</b><small>4 × 3 m</small></button>
-<button class="piece" draggable="true" data-piece="bathroom"><span class="piece-art bath-art"></span><b>Bathroom</b><small>2 × 3 m</small></button>
-<button class="piece" draggable="true" data-piece="garage"><span class="piece-art garage-art"></span><b>Garage</b><small>6 × 5 m</small></button>
-<button class="piece" draggable="true" data-piece="deck"><span class="piece-art deck-art"></span><b>Deck</b><small>4 × 2 m</small></button>
-<button class="piece" draggable="true" data-piece="wall"><span class="piece-art wall-art"></span><b>Wall</b><small>Partition</small></button>
-<button class="piece" draggable="true" data-piece="window"><span class="piece-art window-art"></span><b>Window</b><small>Glass panel</small></button>
-<button class="piece" draggable="true" data-piece="door"><span class="piece-art door-art"></span><b>Door</b><small>Entry panel</small></button>
-</div><p class="hint">Tip: click a piece to add it. Drag pieces around the 3D lot to arrange your layout.</p></div>
+<button class="piece" draggable="true" data-piece="wall"><span class="piece-art wall-art"></span><b>Solid wall</b><small>4 × 0.2 × 3 m</small></button>
+<button class="piece" draggable="true" data-piece="partition"><span class="piece-art wall-art"></span><b>Partition wall</b><small>3 × 0.1 × 2.7 m</small></button>
+<button class="piece" draggable="true" data-piece="corner"><span class="piece-art wall-art"></span><b>Corner wall</b><small>2 connected sides</small></button>
+<button class="piece" draggable="true" data-piece="roof-flat"><span class="piece-art"></span><b>Flat roof</b><small>4 × 4 m</small></button>
+<button class="piece" draggable="true" data-piece="roof-pitched"><span class="piece-art"></span><b>Pitched roof</b><small>4 × 4 m</small></button>
+<button class="piece" draggable="true" data-piece="roof-shed"><span class="piece-art"></span><b>Shed roof</b><small>4 × 4 m</small></button>
+<button class="piece" draggable="true" data-piece="window-sliding"><span class="piece-art window-art"></span><b>Sliding window</b><small>1.5 × 1.2 m</small></button>
+<button class="piece" draggable="true" data-piece="window-casement"><span class="piece-art window-art"></span><b>Casement window</b><small>1.2 × 1.2 m</small></button>
+<button class="piece" draggable="true" data-piece="window-fixed"><span class="piece-art window-art"></span><b>Fixed window</b><small>1.5 × 1.2 m</small></button>
+<button class="piece" draggable="true" data-piece="door-single"><span class="piece-art door-art"></span><b>Single door</b><small>0.9 × 2.1 m</small></button>
+<button class="piece" draggable="true" data-piece="door-double"><span class="piece-art door-art"></span><b>Double door</b><small>1.6 × 2.1 m</small></button>
+<button class="piece" draggable="true" data-piece="door-sliding"><span class="piece-art door-art"></span><b>Sliding door</b><small>1.8 × 2.1 m</small></button>
+</div><p class="hint">Choose a component type, then set its exact dimensions on the right. Pieces snap to nearby edges when they fit.</p></div>
 <div class="section lot-section"><div class="section-title"><span>YOUR LOT</span><small>CHANGE THE SPACE</small></div><label class="control-label">Lot width <output id="lotWidthOut">20 m</output></label><input id="lotWidth" type="range" min="10" max="35" step="1" value="20"><label class="control-label">Lot length <output id="lotLengthOut">25 m</output></label><input id="lotLength" type="range" min="10" max="40" step="1" value="25"><label class="toggle-row"><span><b>Show grid</b><small>Helps pieces line up</small></span><input type="checkbox" id="gridToggle" checked></label></div>
 <div class="section"><div class="section-title"><span>LOOK & FEEL</span><small>ONE CLICK TO CHANGE</small></div><label class="control-label">Exterior style</label><div class="chips" id="styleChoices"><button class="chip active" data-style="modern">Modern</button><button class="chip" data-style="tropical">Tropical</button><button class="chip" data-style="classic">Classic</button><button class="chip" data-style="industrial">Industrial</button></div><label class="control-label">Material</label><div class="material-row" id="materialChoices"><button class="material active" data-material="concrete"><span style="background:#d9d8d1"></span>Concrete</button><button class="material" data-material="wood"><span style="background:#ad8057"></span>Wood</button><button class="material" data-material="white"><span style="background:#f8f7f0"></span>White</button><button class="material" data-material="brick"><span style="background:#a65c48"></span>Brick</button></div></div>
 </aside>
