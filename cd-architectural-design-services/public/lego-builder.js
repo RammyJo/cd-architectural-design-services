@@ -39,7 +39,7 @@ function isOpening(o){return !!o&&typeof o.userData.type==='string'&&(o.userData
 function wallOpenings(wall){wall.updateMatrixWorld(true);return objects.filter(o=>isOpening(o)&&o.userData.hostId===wall.userData.id).map(o=>{const local=wall.worldToLocal(o.position.clone());return {object:o,x:local.x,w:o.userData.w,bottom:local.y,top:local.y+o.userData.h};}).sort((a,b)=>a.x-a.w/2-(b.x-b.w/2));}
 function buildWallHost(wall,p=wall.userData){
   while(wall.children.length){const child=wall.children[0];wall.remove(child);if(child.geometry)child.geometry.dispose();}
-  const material=makeMat(mats[settings.material]||mats.concrete),edgeMat=new THREE.LineBasicMaterial({color:0x53605d});
+  const wallFinish=wall.userData.finish||'same';const material=makeMat(wallFinish==='same'?(mats[settings.material]||mats.concrete):(mats[wallFinish]??mats.concrete)),edgeMat=new THREE.LineBasicMaterial({color:0x53605d});
   const openings=wallOpenings(wall).filter(o=>o.x-o.w/2>=-p.w/2+.03&&o.x+o.w/2<=p.w/2-.03&&o.bottom>=-.001&&o.top<=p.h+.001);
   const add=(x0,x1,y0,y1)=>{const w=x1-x0,h=y1-y0;if(w<=.015||h<=.015)return;const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,p.l),material.clone());mesh.position.set((x0+x1)/2,(y0+y1)/2,0);wall.add(mesh);};
   let cursor=-p.w/2;
