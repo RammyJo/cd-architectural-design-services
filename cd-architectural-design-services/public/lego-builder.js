@@ -134,7 +134,7 @@ $('#lotWidth').addEventListener('input',e=>{recordHistory();settings.lotWidth=+e
 $('#gridToggle').onchange=e=>{recordHistory();settings.grid=e.target.checked;grid.visible=settings.grid;persistProject();};
 $$('[data-style]').forEach(b=>b.onclick=()=>{recordHistory();settings.style=b.dataset.style;$$('[data-style]').forEach(x=>x.classList.toggle('active',x===b));const roofs={modern:0x3f5153,tropical:0x675348,classic:0x555d60,industrial:0x667276};objects.forEach(o=>{o.traverse(c=>{if(c.isMesh&&c.geometry.type==='BoxGeometry'&&c.position.y>o.userData.h+.1)c.material.color.setHex(roofs[settings.style]);});});persistProject();});
 $('[data-material]').forEach(b=>b.classList.toggle('active',b.dataset.material===settings.material));
-$$('[data-finish]').forEach(b=>b.onclick=()=>{if(!selected)return;recordHistory();selected.userData.finish=b.dataset.finish;applyFinish(selected,b.dataset.finish);$('[data-finish]').forEach(x=>x.classList.toggle('active',x===b));persistProject();});
+$('[data-finish]').forEach(b=>b.classList.toggle('active',b.dataset.finish===(selected?.userData.finish||'same')));
 $$('[data-view]').forEach(b=>b.onclick=()=>{currentView=b.dataset.view;$$('[data-view]').forEach(x=>x.classList.toggle('active',x===b));if(currentView==='top'){camera.position.set(0,38,.01);camera.lookAt(0,0,0);}else{camera.position.set(24,23,27);camera.lookAt(0,0,0);}});
 $('#homeView').onclick=()=>{currentView='3d';$('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view==='3d'));camera.position.set(24,23,27);camera.lookAt(0,0,0);};
 $('#resetBtn').onclick=()=>{recordHistory();objects.forEach(o=>scene.remove(o));objects=[];clearSelection();updateStats();persistProject();};
