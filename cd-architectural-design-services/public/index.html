@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f3ed">
+  <meta name="theme-color" content="#101112">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="index, follow">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="C + D Architectural Design Services">
-  <meta name="twitter:title" content="C + D Architectural Design Services | Thoughtfully Designed Spaces">
-  <meta name="twitter:description" content="Thoughtful architecture begins with understanding you, your site, and the place you want to call home.">
+  <meta name="twitter:title" content="C + D Architectural Design Services | A Home That Fits Your Real Life">
+  <meta name="twitter:description" content="Design starts with your people, your routines, your site, and the things that matter in everyday life.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85">
-  <meta name="description" content="C + D Architectural Design Services creates considered spaces shaped around your lifestyle, site, and vision. Start a residential design brief online.">
+  <meta name="description" content="C + D Architectural Design Services begins with the people who will use a space, their routines, their site, and what matters most. Start a residential project brief.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="C + D Architectural Design Services | Thoughtfully Designed Spaces">
   <meta property="og:description" content="Thoughtful architecture begins with understanding you, your site, and the place you want to call home.">
@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="site-config.js"></script>
   <script type="module" src="site.js"></script>
@@ -54,28 +54,57 @@
     </div>
   </header>
   <main id="main">
-    <section class="hero container">
+    <section class="hero container" aria-labelledby="home-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span> C + D ARCHITECTURAL DESIGN SERVICES</p>
-        <h1>Space to live.<br><em>Room to become.</em></h1>
-        <p class="hero-text">Thoughtful architecture begins with understanding you: how you live, what matters most, and the place you want to call home.</p>
-        <div class="hero-actions">
-          <a class="button button-dark" href="project-brief.html">Start a project brief <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="approach.html">Next page: our approach <span aria-hidden="true">↗</span></a>
+        <p class="eyebrow"><span class="eyebrow-line"></span> DESIGN THAT STARTS WITH YOU</p>
+        <h1 id="home-title">A home that fits<br><em>your real life.</em></h1>
+        <p class="hero-text">Not just a style you save. A space shaped around your people, your routines, the things you love, and the parts of everyday life you want to make easier.</p>
+
+        <div class="personalize-panel" data-personalize>
+          <div class="personalize-heading">
+            <div>
+              <p class="personalize-kicker">START WHERE YOU ARE</p>
+              <h2>What are you planning?</h2>
+            </div>
+          </div>
+          <div class="project-choice-list" role="radiogroup" aria-label="Choose the closest match for your project">
+            <button class="project-choice" type="button" role="radio" aria-checked="false" aria-pressed="false" data-project-type="new-home">
+              <span class="choice-indicator" aria-hidden="true"></span>
+              <span class="project-choice-copy"><strong>A new home</strong><small>A place built around your next chapter.</small></span>
+            </button>
+            <button class="project-choice" type="button" role="radio" aria-checked="false" aria-pressed="false" data-project-type="renovation">
+              <span class="choice-indicator" aria-hidden="true"></span>
+              <span class="project-choice-copy"><strong>Improve the home I have</strong><small>Make an existing space work harder.</small></span>
+            </button>
+            <button class="project-choice" type="button" role="radio" aria-checked="false" aria-pressed="false" data-project-type="space-planning">
+              <span class="choice-indicator" aria-hidden="true"></span>
+              <span class="project-choice-copy"><strong>Rethink a room or interior</strong><small>Find a better flow, feel, or use.</small></span>
+            </button>
+            <button class="project-choice" type="button" role="radio" aria-checked="false" aria-pressed="false" data-project-type="consultation">
+              <span class="choice-indicator" aria-hidden="true"></span>
+              <span class="project-choice-copy"><strong>I'm still exploring</strong><small>Start with questions, not decisions.</small></span>
+            </button>
+          </div>
+          <p class="personalize-message" id="personalize-message" aria-live="polite">Choose the closest match. You do not need to have everything figured out before you begin.</p>
+          <div class="personalize-actions">
+            <a class="button button-dark" href="project-brief.html" data-personalize-cta>Start my project brief <span aria-hidden="true">↗</span></a>
+            <span class="personalize-time">NO PERFECT ANSWERS NEEDED</span>
+          </div>
         </div>
-        <div class="hero-note"><span class="note-number">01</span><span>Good design starts<br>with a good conversation.</span></div>
+
+        <a class="text-link hero-next-link" href="approach.html">Next page: our approach <span aria-hidden="true">↗</span></a>
       </div>
       <div class="hero-visual">
         <div class="hero-image-frame">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1500&q=88" alt="Contemporary home with clean lines and landscaped surroundings" fetchpriority="high" decoding="async" width="1500" height="1000">
-          <div class="image-caption"><span>DESIGN THAT FEELS PERSONAL</span><span>EST. ON YOUR VISION</span></div>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1500&q=88" alt="Architectural reference of a contemporary home with clean lines and landscaped surroundings" fetchpriority="high" decoding="async" width="1500" height="1000">
+          <div class="image-caption"><span>A HOME, MADE PERSONAL</span><span>DESIGN REFERENCE</span></div>
         </div>
-        <div class="hero-stamp" aria-hidden="true"><span>FORM</span><span class="stamp-dot">·</span><span>FUNCTION</span><span class="stamp-dot">·</span><span>FEELING</span></div>
+        <div class="hero-stamp" aria-hidden="true"><span>YOUR SITE</span><span class="stamp-dot">·</span><span>YOUR ROUTINE</span><span class="stamp-dot">·</span><span>YOUR PRIORITIES</span></div>
       </div>
     </section>
   </main>
   <footer class="site-footer">
-    <div class="container footer-main"><a class="brand brand-footer" href="index.html"><span class="brand-mark" aria-hidden="true">C<span>+</span>D</span><span class="brand-name">ARCHITECTURAL<br>DESIGN SERVICES</span></a><p>Thoughtful spaces, shaped around your life.</p><a href="project-brief.html" class="footer-link">Have a project in mind? <span aria-hidden="true">↗</span></a></div>
+    <div class="container footer-main"><a class="brand brand-footer" href="index.html"><span class="brand-mark" aria-hidden="true">C<span>+</span>D</span><span class="brand-name">ARCHITECTURAL<br>DESIGN SERVICES</span></a><p>Architecture that starts with the life happening inside it.</p><a href="project-brief.html" class="footer-link">Have a project in mind? <span aria-hidden="true">↗</span></a></div>
     <div class="container footer-bottom"><span>© <span id="year"></span> C + D Architectural Design Services</span><span>DESIGNED AROUND WHAT MATTERS</span><div class="footer-links"><a href="index.html">Home</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy notice</a><a href="project-brief.html">Project inquiry</a></div></div>
   </footer>
 </body>
