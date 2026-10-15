@@ -218,6 +218,7 @@ export default defineConfig({
         services: resolve(process.cwd(), 'public/services.html'),
         directions: resolve(process.cwd(), 'public/design-directions.html'),
         process: resolve(process.cwd(), 'public/process.html'),
+        buildHome: resolve(process.cwd(), 'public/build-home.html'),
         faq: resolve(process.cwd(), 'public/faq.html'),
         contact: resolve(process.cwd(), 'public/contact.html'),
         brief: resolve(process.cwd(), 'public/project-brief.html'),
