@@ -338,14 +338,32 @@
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type');
     const select = document.querySelector('#project-type');
-    if (!type || !select) return;
     const options = {
       'new-home': 'New home',
       renovation: 'Renovation',
       'space-planning': 'Interior / space planning',
       consultation: 'Concept consultation'
     };
-    if (options[type]) select.value = options[type];
+    if (type && select && options[type]) select.value = options[type];
+    if (params.get('source') !== 'home-builder') return;
+    try {
+      const saved = sessionStorage.getItem('cd-home-builder-concept-v1');
+      if (!saved) return;
+      const concept = JSON.parse(saved);
+      const setValue = (selector, value) => {
+        const field = document.querySelector(selector);
+        if (!field || value === undefined || value === null || String(value).trim() === '') return;
+        field.value = String(value);
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+      };
+      setValue('#lot-area', concept.lotArea);
+      setValue('#storeys', concept.storeys);
+      setValue('#floor-area', concept.floorArea);
+      setValue('#vision-notes', concept.concept);
+      const extraSpaces = document.querySelector('#other-spaces');
+      if (extraSpaces && Array.isArray(concept.rooms)) extraSpaces.value = concept.rooms.join(', ');
+      sessionStorage.removeItem('cd-home-builder-concept-v1');
+    } catch (_) { /* Manual project brief remains available if prefill fails. */ }
   };
 
   nextButton.addEventListener('click', () => {

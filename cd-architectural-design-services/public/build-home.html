@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101112">
+  <meta name="description" content="Build a starting concept for your future home, explore design choices, and see an early construction budget range with C + D Architectural Design Services.">
+  <title>Build Your Home | C + D Architectural Design Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="builder.css">
+  <script type="module" src="builder.js"></script>
+</head>
+<body>
+  <header class="builder-header">
+    <a class="brand" href="index.html" aria-label="C plus D home"><span class="brand-mark">C<span>+</span>D</span><span class="brand-caption">ARCHITECTURAL DESIGN SERVICES</span></a>
+    <div class="header-center"><span class="live-dot"></span> YOUR HOME, YOUR DECISIONS</div>
+    <a class="exit-link" href="index.html">Exit builder <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="builder-shell">
+    <aside class="steps-sidebar" aria-label="Builder steps">
+      <div class="sidebar-heading"><span>HOME STUDIO</span><span id="step-counter">01 / 05</span></div>
+      <nav class="step-list" id="step-list">
+        <button class="step-item active" type="button" data-go-step="0"><span class="step-number">01</span><span><strong>Start with the site</strong><small>Size and location</small></span></button>
+        <button class="step-item" type="button" data-go-step="1"><span class="step-number">02</span><span><strong>Choose a character</strong><small>Style and structure</small></span></button>
+        <button class="step-item" type="button" data-go-step="2"><span class="step-number">03</span><span><strong>Build your rooms</strong><small>Spaces for your life</small></span></button>
+        <button class="step-item" type="button" data-go-step="3"><span class="step-number">04</span><span><strong>Make it yours</strong><small>Roof and finishes</small></span></button>
+        <button class="step-item" type="button" data-go-step="4"><span class="step-number">05</span><span><strong>Review your idea</strong><small>Budget and summary</small></span></button>
+      </nav>
+      <div class="sidebar-note"><span class="note-icon" aria-hidden="true">✳</span><strong>A useful first draft.</strong><p>You can change your choices as often as you like. This is a starting concept, not a final architectural plan.</p></div>
+    </aside>
+
+    <section class="work-area">
+      <div class="work-topline"><span id="step-kicker">STEP 01 · THE SITE</span><span class="saved-status" id="saved-status">Your choices update as you go</span></div>
+
+      <section class="builder-step active" data-step="0" aria-labelledby="step-title-0">
+        <div class="step-heading"><div><p class="eyebrow">EVERY HOME STARTS SOMEWHERE</p><h1 id="step-title-0">Let's start with <em>your place.</em></h1><p class="step-intro">Tell us what you are working with. Estimates become more useful when the land and location are part of the picture.</p></div></div>
+        <div class="field-grid">
+          <label class="field"><span>Where will you build?</span><select id="location"><option value="province">Provincial area, Philippines</option><option value="metro">Metro Manila</option><option value="cebu">Cebu / Central Visayas</option><option value="davao">Davao Region</option><option value="la-union">La Union / Ilocos Region</option><option value="other">Other location in the Philippines</option></select><small>Local labor, delivery, and site conditions affect cost.</small></label>
+          <label class="field"><span>Lot area</span><span class="input-unit"><input id="lot-area" type="number" min="60" max="10000" step="10" value="200" inputmode="numeric"><b>m²</b></span><small>The land your home will sit on.</small></label>
+          <label class="field"><span>Target floor area</span><span class="input-unit"><input id="floor-area" type="number" min="25" max="2000" step="5" value="100" inputmode="numeric"><b>m²</b></span><small>Total enclosed floor area across all floors.</small></label>
+          <label class="field"><span>Number of storeys</span><select id="storeys"><option value="1">1 storey</option><option value="2">2 storeys</option><option value="3">3 storeys</option></select><small>More floors change structure and access.</small></label>
+        </div>
+        <div class="callout"><span aria-hidden="true">ⓘ</span><p><strong>Small lot, big plans?</strong> The builder will flag when the proposed floor area is larger than the lot area. Actual setbacks, easements, and allowable building coverage need professional checking.</p></div>
+      </section>
+
+      <section class="builder-step" data-step="1" aria-labelledby="step-title-1" hidden>
+        <div class="step-heading"><div><p class="eyebrow">THE FEEL OF HOME</p><h1 id="step-title-1">Choose a <em>character.</em></h1><p class="step-intro">Pick the direction that feels closest to you. This guides the concept and finish allowance; it does not lock you into a style.</p></div></div>
+        <div class="option-grid style-grid">
+          <button class="visual-option selected" type="button" data-style="modern" aria-pressed="true"><span class="style-illustration style-modern"><i></i><b></b><em></em></span><span class="option-copy"><strong>Modern</strong><small>Clean geometry, wide openings</small></span><span class="option-check">✓</span></button>
+          <button class="visual-option" type="button" data-style="tropical" aria-pressed="false"><span class="style-illustration style-tropical"><i></i><b></b><em></em></span><span class="option-copy"><strong>Tropical</strong><small>Shade, airflow, outdoor living</small></span><span class="option-check">✓</span></button>
+          <button class="visual-option" type="button" data-style="minimal" aria-pressed="false"><span class="style-illustration style-minimal"><i></i><b></b><em></em></span><span class="option-copy"><strong>Minimal</strong><small>Quiet forms, fewer details</small></span><span class="option-check">✓</span></button>
+          <button class="visual-option" type="button" data-style="classic" aria-pressed="false"><span class="style-illustration style-classic"><i></i><b></b><em></em></span><span class="option-copy"><strong>Classic</strong><small>Familiar proportions, timeless</small></span><span class="option-check">✓</span></button>
+        </div>
+        <div class="field-grid two-col">
+          <label class="field"><span>Roof form</span><select id="roof"><option value="gable">Gable roof</option><option value="hip">Hip roof</option><option value="flat">Flat / low-slope roof</option></select><small>Final form depends on structure, climate, and drainage.</small></label>
+          <label class="field"><span>Structure direction</span><select id="structure"><option value="concrete">Reinforced concrete + masonry</option><option value="mixed">Mixed concrete and lightweight systems</option><option value="light">Lightweight / steel-framed concept</option></select><small>To be validated by the architect and structural engineer.</small></label>
+        </div>
+      </section>
+
+      <section class="builder-step" data-step="2" aria-labelledby="step-title-2" hidden>
+        <div class="step-heading"><div><p class="eyebrow">MAKE ROOM FOR REAL LIFE</p><h1 id="step-title-2">What happens <em>inside?</em></h1><p class="step-intro">Add the spaces that matter to your household. There are no perfect answers. Start with how you live today and what you hope to do at home.</p></div></div>
+        <div class="room-toolbar"><span><strong id="room-count">6</strong> spaces selected</span><button class="text-button" type="button" id="reset-rooms">Reset rooms</button></div>
+        <div class="room-grid" id="room-grid">
+          <button class="room-option selected" type="button" data-room="living" aria-pressed="true"><span class="room-symbol">▱</span><span><strong>Living room</strong><small>Gather and relax</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option selected" type="button" data-room="kitchen" aria-pressed="true"><span class="room-symbol">⌑</span><span><strong>Kitchen & dining</strong><small>Meals and everyday life</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option selected" type="button" data-room="bedroom" aria-pressed="true"><span class="room-symbol">▰</span><span><strong>Bedrooms</strong><small>Private spaces</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option selected" type="button" data-room="bathroom" aria-pressed="true"><span class="room-symbol">◌</span><span><strong>Bathrooms</strong><small>Daily essentials</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option selected" type="button" data-room="laundry" aria-pressed="true"><span class="room-symbol">⌁</span><span><strong>Laundry / utility</strong><small>Practical work areas</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option selected" type="button" data-room="parking" aria-pressed="true"><span class="room-symbol">⌂</span><span><strong>Carport / parking</strong><small>Vehicle and storage</small></span><span class="room-toggle">✓</span></button>
+          <button class="room-option" type="button" data-room="office" aria-pressed="false"><span class="room-symbol">▤</span><span><strong>Home office</strong><small>Focus and remote work</small></span><span class="room-toggle">+</span></button>
+          <button class="room-option" type="button" data-room="guest" aria-pressed="false"><span class="room-symbol">⌑</span><span><strong>Guest room</strong><small>Space for visitors</small></span><span class="room-toggle">+</span></button>
+          <button class="room-option" type="button" data-room="family" aria-pressed="false"><span class="room-symbol">⌂</span><span><strong>Family / flex room</strong><small>Play, study, or hobbies</small></span><span class="room-toggle">+</span></button>
+          <button class="room-option" type="button" data-room="balcony" aria-pressed="false"><span class="room-symbol">▱</span><span><strong>Balcony / terrace</strong><small>Fresh air and outdoor time</small></span><span class="room-toggle">+</span></button>
+          <button class="room-option" type="button" data-room="storage" aria-pressed="false"><span class="room-symbol">▦</span><span><strong>Extra storage</strong><small>Keep everyday clutter away</small></span><span class="room-toggle">+</span></button>
+          <button class="room-option" type="button" data-room="garden" aria-pressed="false"><span class="room-symbol">✳</span><span><strong>Garden / courtyard</strong><small>A little room outdoors</small></span><span class="room-toggle">+</span></button>
+        </div>
+        <label class="field household-field"><span>How many people will usually live here?</span><select id="household"><option value="1-2">1–2 people</option><option value="3-4" selected>3–4 people</option><option value="5-6">5–6 people</option><option value="7+">7 or more</option></select></label>
+      </section>
+
+      <section class="builder-step" data-step="3" aria-labelledby="step-title-3" hidden>
+        <div class="step-heading"><div><p class="eyebrow">THE DETAILS THAT MAKE IT YOURS</p><h1 id="step-title-3">Choose your <em>finish level.</em></h1><p class="step-intro">Finishes change both the feeling and the cost of a home. Choose a starting point; specific products and specifications come later.</p></div></div>
+        <div class="finish-options">
+          <label class="finish-option"><input type="radio" name="finish" value="essential"><span class="finish-swatch essential-swatch"><i></i><i></i><i></i></span><span class="finish-copy"><strong>Essential</strong><small>Durable, straightforward materials. Keep the budget in focus.</small><b>Lower finish allowance</b></span></label>
+          <label class="finish-option selected"><input type="radio" name="finish" value="balanced" checked><span class="finish-swatch balanced-swatch"><i></i><i></i><i></i></span><span class="finish-copy"><strong>Balanced</strong><small>A considered mix of durability, comfort, and visual detail.</small><b>Mid-range finish allowance</b></span></label>
+          <label class="finish-option"><input type="radio" name="finish" value="premium"><span class="finish-swatch premium-swatch"><i></i><i></i><i></i></span><span class="finish-copy"><strong>Premium</strong><small>More bespoke details and higher-specification materials.</small><b>Higher finish allowance</b></span></label>
+        </div>
+        <div class="field-grid two-col finish-fields">
+          <label class="field"><span>Natural light</span><select id="windows"><option value="standard">Standard windows</option><option value="large">Larger glass openings</option><option value="mixed">A mix of openings and shaded windows</option></select></label>
+          <label class="field"><span>Outdoor scope</span><select id="outdoor"><option value="basic">Basic site works</option><option value="garden">Garden and simple landscaping</option><option value="deck">Terrace / deck and landscaping</option></select></label>
+        </div>
+      </section>
+
+      <section class="builder-step" data-step="4" aria-labelledby="step-title-4" hidden>
+        <div class="step-heading"><div><p class="eyebrow">YOUR IDEA, IN ONE PLACE</p><h1 id="step-title-4">A first look at <em>what it could cost.</em></h1><p class="step-intro">Review the decisions you made. Adjust anything you like before preparing a brief to discuss with the C + D team.</p></div></div>
+        <div class="review-hero"><div><span class="review-label">PRELIMINARY CONSTRUCTION RANGE</span><div class="review-price" id="review-range">₱2.5M–₱4.5M</div><p id="review-mid">Working midpoint: ₱3.5M</p></div><span class="review-icon">₱</span></div>
+        <div class="review-grid" id="review-grid"></div>
+        <div class="review-breakdown"><div class="breakdown-heading"><h2>How this estimate is formed</h2><span>Editable assumptions</span></div><div id="breakdown-rows"></div></div>
+        <div class="callout warning-callout"><span aria-hidden="true">ⓘ</span><p><strong>Planning range only, not a quotation.</strong> These broad concept-stage allowances are illustrative, not verified current market rates. They do not replace a site inspection, measured plans, engineering, bill of quantities, contractor pricing, or a review by C + D. Land, taxes, permits, professional fees, financing, and unusual site works may be excluded.</p></div>
+        <div class="review-actions"><button class="button button-outline" type="button" id="download-summary">Download my concept summary</button><a class="button button-primary" id="contact-studio" href="project-brief.html">Discuss this with C + D <span aria-hidden="true">↗</span></a></div>
+      </section>
+
+      <div class="builder-footer">
+        <button class="button button-quiet" id="back-button" type="button" disabled><span aria-hidden="true">←</span> Back</button>
+        <div class="footer-progress"><div class="progress-track"><span id="progress-fill"></span></div><span id="progress-label">1 of 5</span></div>
+        <button class="button button-primary" id="next-button" type="button">Next step <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <aside class="preview-sidebar" aria-label="Live home preview and cost estimate">
+      <div class="preview-heading"><div><span class="eyebrow">YOUR CONCEPT</span><h2>Taking shape.</h2></div><span class="live-badge"><i></i> LIVE</span></div>
+      <div class="house-preview" id="house-preview" data-style="modern" data-roof="gable" aria-label="Illustrative isometric home concept preview">
+        <div class="preview-sky"></div><div class="preview-ground"></div>
+        <svg class="house-svg" viewBox="0 0 420 310" role="img" aria-label="Illustrative house volume changes with your design choices">
+          <defs><linearGradient id="wallA" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#faf8f0"/><stop offset="1" stop-color="#d8d4c9"/></linearGradient><linearGradient id="wallB" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#dedbd1"/><stop offset="1" stop-color="#aaa79e"/></linearGradient><linearGradient id="glass" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#a6d3d2"/><stop offset="1" stop-color="#345c61"/></linearGradient></defs>
+          <ellipse cx="212" cy="261" rx="172" ry="26" fill="#1d342d" opacity=".13"/>
+          <path d="M39 222 L210 128 L384 216 L213 303 Z" fill="#c5bdac" stroke="#aaa18e" stroke-width="1.2"/>
+          <path d="M48 219 L210 139 L373 218 L211 294 Z" fill="#e6e1d4"/>
+          <path d="M48 219 L211 294 L211 301 L48 226 Z" fill="#00b98d" opacity=".65"/>
+          <path d="M211 294 L373 218 L373 225 L211 301 Z" fill="#9b978b"/>
+          <g id="house-volume">
+            <path d="M102 166 L224 102 L322 152 L201 216 Z" fill="#f8f5ed" stroke="#a8a49a" stroke-width="1.4"/>
+            <path d="M102 166 L201 216 L201 258 L102 207 Z" fill="url(#wallA)" stroke="#aaa79d" stroke-width="1.2"/>
+            <path d="M201 216 L322 152 L322 195 L201 258 Z" fill="url(#wallB)" stroke="#99968d" stroke-width="1.2"/>
+            <path d="M120 174 L154 191 L154 222 L120 205 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M162 196 L190 210 L190 239 L162 225 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M214 222 L241 207 L241 235 L214 249 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M252 201 L281 185 L281 214 L252 230 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M292 180 L310 171 L310 199 L292 208 Z" fill="#403f3a" stroke="#fbfbf8" stroke-width="1.5"/>
+            <path id="roof-shape" d="M91 163 L222 94 L333 149 L202 220 Z" fill="#e4e1d7" stroke="#a8a49a" stroke-width="1.6"/>
+            <path d="M102 161 L222 99 L321 151 L201 213 Z" fill="#f9f8f2" stroke="#c3c0b6" stroke-width="1"/>
+            <path d="M201 213 L202 220 L333 149 L321 151 Z" fill="#aaa69c"/>
+          </g>
+          <g id="upper-floor" opacity="0">
+            <path d="M122 123 L221 71 L300 112 L201 164 Z" fill="#f9f8f2" stroke="#a8a49a" stroke-width="1.4"/>
+            <path d="M122 123 L201 164 L201 204 L122 163 Z" fill="#f0ede4" stroke="#aaa79d" stroke-width="1.2"/>
+            <path d="M201 164 L300 112 L300 153 L201 204 Z" fill="#bbb8ae" stroke="#99968d" stroke-width="1.2"/>
+            <path d="M137 131 L165 146 L165 176 L137 161 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M214 171 L245 155 L245 185 L214 201 Z" fill="url(#glass)" stroke="#fbfbf8" stroke-width="2"/>
+            <path d="M111 121 L220 63 L312 111 L202 173 Z" fill="#f9f8f2" stroke="#a8a49a" stroke-width="1.6"/>
+            <path d="M124 121 L220 70 L298 111 L202 163 Z" fill="#dedbd1"/>
+          </g>
+          <g id="preview-trees" fill="#50785f"><circle cx="61" cy="190" r="15"/><circle cx="74" cy="178" r="18"/><circle cx="357" cy="192" r="19"/><circle cx="371" cy="177" r="15"/></g>
+          <g id="preview-labels" fill="#007e63" font-family="DM Sans,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="1"><text x="46" y="281">CONCEPT ONLY</text><text x="294" y="281">NOT TO SCALE</text></g>
+        </svg>
+        <span class="preview-tag">MASSING STUDY · NOT A BUILDABLE PLAN</span>
+      </div>
+      <div class="preview-caption"><span id="preview-style">Modern home</span><span id="preview-size">100 m² · 1 storey</span></div>
+      <div class="estimate-card"><div class="estimate-card-top"><span>Early cost allowance</span><button class="info-button" type="button" aria-label="About this estimate" title="This is a broad concept-stage allowance, not a contractor quote.">i</button></div><div class="estimate-number" id="estimate-number">₱2.5M–₱4.5M</div><div class="estimate-sub">Indicative range · PHP</div><div class="estimate-meter"><span id="estimate-meter-fill"></span></div><div class="estimate-meta"><span>Lower allowance</span><span>Higher allowance</span></div><a href="#step-title-4" class="estimate-detail" id="view-estimate">See the assumptions <span aria-hidden="true">↗</span></a></div>
+      <div class="summary-card"><div class="summary-heading"><strong>Your choices</strong><button type="button" id="edit-choices">Edit</button></div><div class="summary-line"><span>Style</span><strong id="summary-style">Modern</strong></div><div class="summary-line"><span>Floor area</span><strong id="summary-area">100 m²</strong></div><div class="summary-line"><span>Storeys</span><strong id="summary-storeys">1</strong></div><div class="summary-line"><span>Rooms</span><strong id="summary-rooms">6 selected</strong></div><div class="summary-line"><span>Finish level</span><strong id="summary-finish">Balanced</strong></div></div>
+      <p class="estimate-disclaimer">Concept-stage budget guidance only. Real costs depend on location, soil, access, design, specifications, labor, and current supplier/contractor pricing.</p>
+    </aside>
+  </main>
+</body>
+</html>
