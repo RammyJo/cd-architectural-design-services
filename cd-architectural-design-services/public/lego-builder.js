@@ -23,8 +23,52 @@ function makePiece(type,x=0,z=0){const p=presets[type]||presets.room;const group
 if(type==='wall'){body=new THREE.Mesh(new THREE.BoxGeometry(p.w,p.h,p.l),mainMat);body.position.y=p.h/2;group.add(body);addEdge(group,p.w,p.h,p.l);}
 else if(type==='window'){body=new THREE.Mesh(new THREE.BoxGeometry(p.w,p.h,p.l),darkMat);body.position.y=p.h/2+0.9;group.add(body);const glass=new THREE.Mesh(new THREE.BoxGeometry(p.w-.15,1.2,p.l+.03),new THREE.MeshStandardMaterial({color:0xaed3dd,roughness:.15,metalness:.25,transparent:true,opacity:.82}));glass.position.y=p.h/2+.9;group.add(glass);addEdge(group,p.w,p.h,p.l);}
 else if(type==='door'){body=new THREE.Mesh(new THREE.BoxGeometry(p.w,p.h,p.l),makeMat(0x986b48));body.position.y=p.h/2;group.add(body);const knob=new THREE.Mesh(new THREE.SphereGeometry(.045,10,8),makeMat(0xe4c47c,.25));knob.position.set(p.w*.34,p.h*.52,p.l/2+.04);group.add(knob);}
-else {const baseH=type==='deck'?.18:.14;body=new THREE.Mesh(new THREE.BoxGeometry(p.w,baseH,p.l),type==='deck'?makeMat(mats.wood):detailMat);body.position.y=baseH/2;body.receiveShadow=true;group.add(body);if(type!=='deck'){const wallH=p.h;const wallT=.16;const wallColor=mainMat;const wall1=new THREE.Mesh(new THREE.BoxGeometry(p.w,wallH,wallT),wallColor);wall1.position.set(0,wallH/2,p.l/2);group.add(wall1);const wall2=new THREE.Mesh(new THREE.BoxGeometry(p.w,wallH,wallT),wallColor);wall2.position.set(0,wallH/2,-p.l/2);group.add(wall2);const wall3=new THREE.Mesh(new THREE.BoxGeometry(wallT,wallH,p.l),wallColor);wall3.position.set(-p.w/2,wallH/2,0);group.add(wall3);const wall4=new THREE.Mesh(new THREE.BoxGeometry(wallT,wallH,p.l),wallColor);wall4.position.set(p.w/2,wallH/2,0);group.add(wall4);const trim=new THREE.Mesh(new THREE.BoxGeometry(p.w+.1,.12,p.l+.1),makeMat(settings.style==='tropical'?0x8d6847:0xf5f1e7));trim.position.y=wallH+.06;group.add(trim);if(settings.style!=='industrial'){const roofColor=settings.style==='tropical'?0x675348:settings.style==='classic'?0x555d60:0x3f5153;const roof=new THREE.Mesh(new THREE.BoxGeometry(p.w+.45,.18,p.l+.45),makeMat(roofColor));roof.position.y=wallH+.22;group.add(roof);}const door=new THREE.Mesh(new THREE.BoxGeometry(Math.min(.95,p.w*.22),Math.min(2.1,wallH*.72),.04),makeMat(0x946c4a));door.position.set(-p.w*.24,Math.min(2.1,wallH*.72)/2,p.l/2+.09);group.add(door);const winW=Math.min(1.5,p.w*.3);for(const side of [-1,1]){const win=new THREE.Mesh(new THREE.BoxGeometry(winW,1.05,.06),new THREE.MeshStandardMaterial({color:0xaed5df,roughness:.18,metalness:.15}));win.position.set(side*p.w*.25,wallH*.57,p.l/2+.1);group.add(win);}if(type==='bedroom'){const bed=new THREE.Mesh(new THREE.BoxGeometry(p.w*.48,.32,p.l*.38),makeMat(0xebe5d8));bed.position.set(0,.34,-p.l*.1);group.add(bed);const pillow=new THREE.Mesh(new THREE.BoxGeometry(p.w*.3,.12,.4),makeMat(0xf8f7f2));pillow.position.set(0,.56,-p.l*.27);group.add(pillow);}if(type==='living'){const sofa=new THREE.Mesh(new THREE.BoxGeometry(p.w*.42,.65,.9),makeMat(settings.style==='tropical'?0x879b83:0xc4b8a7));sofa.position.set(-p.w*.2,.4,-p.l*.15);group.add(sofa);const table=new THREE.Mesh(new THREE.BoxGeometry(1,.18,.7),makeMat(0x986b48));table.position.set(.6,.25,-.1);group.add(table);}if(type==='kitchen'){const counter=new THREE.Mesh(new THREE.BoxGeometry(p.w*.78,.9,.55),makeMat(0xf6f3e9));counter.position.set(0,.52,-p.l*.32);group.add(counter);}}}
+else {const baseH=type==='deck'?.18:.14;body=new THREE.Mesh(new THREE.BoxGeometry(p.w,baseH,p.l),type==='deck'?makeMat(mats.wood):detailMat);body.position.y=baseH/2;body.receiveShadow=true;group.add(body);if(type!=='deck'){const wallH=p.h;const wallT=.16;const wallColor=mainMat;addRoomFrontWall(group,p.w,wallH,wallT,p.l/2,wallColor);const wall2=new THREE.Mesh(new THREE.BoxGeometry(p.w,wallH,wallT),wallColor);wall2.position.set(0,wallH/2,-p.l/2);group.add(wall2);const wall3=new THREE.Mesh(new THREE.BoxGeometry(wallT,wallH,p.l),wallColor);wall3.position.set(-p.w/2,wallH/2,0);group.add(wall3);const wall4=new THREE.Mesh(new THREE.BoxGeometry(wallT,wallH,p.l),wallColor);wall4.position.set(p.w/2,wallH/2,0);group.add(wall4);const trim=new THREE.Mesh(new THREE.BoxGeometry(p.w+.1,.12,p.l+.1),makeMat(settings.style==='tropical'?0x8d6847:0xf5f1e7));trim.position.y=wallH+.06;group.add(trim);if(settings.style!=='industrial'){const roofColor=settings.style==='tropical'?0x675348:settings.style==='classic'?0x555d60:0x3f5153;const roof=new THREE.Mesh(new THREE.BoxGeometry(p.w+.45,.18,p.l+.45),makeMat(roofColor));roof.position.y=wallH+.22;group.add(roof);}if(type==='bedroom'){const bed=new THREE.Mesh(new THREE.BoxGeometry(p.w*.48,.32,p.l*.38),makeMat(0xebe5d8));bed.position.set(0,.34,-p.l*.1);group.add(bed);const pillow=new THREE.Mesh(new THREE.BoxGeometry(p.w*.3,.12,.4),makeMat(0xf8f7f2));pillow.position.set(0,.56,-p.l*.27);group.add(pillow);}if(type==='living'){const sofa=new THREE.Mesh(new THREE.BoxGeometry(p.w*.42,.65,.9),makeMat(settings.style==='tropical'?0x879b83:0xc4b8a7));sofa.position.set(-p.w*.2,.4,-p.l*.15);group.add(sofa);const table=new THREE.Mesh(new THREE.BoxGeometry(1,.18,.7),makeMat(0x986b48));table.position.set(.6,.25,-.1);group.add(table);}if(type==='kitchen'){const counter=new THREE.Mesh(new THREE.BoxGeometry(p.w*.78,.9,.55),makeMat(0xf6f3e9));counter.position.set(0,.52,-p.l*.32);group.add(counter);}}}
 group.position.set(x,0,z);group.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});scene.add(group);objects.push(group);select(group);updateStats();if(!restoring)persistProject();return group;}
+
+function addRoomFrontWall(group,w,h,t,z,material){
+  // A simple front-wall elevation with a real doorway gap and two window gaps.
+  // Openings are represented by missing wall segments, not painted rectangles.
+  const doorW=Math.min(.9,w*.28), doorH=Math.min(2.1,h*.78), doorX=-w*.24;
+  const windowW=Math.min(1.05,w*.22), windowH=Math.min(1.05,h*.36), windowY=Math.min(h*.62,Math.max(1.05,h*.52));
+  const windows=w>=4;
+  const openings=[{x:doorX,w:doorW,bottom:0,top:doorH,kind:'door'}];
+  if(windows){
+    for(const x of [-w*.27,w*.27]){
+      const left=x-windowW/2,right=x+windowW/2;
+      if(Math.abs(x-doorX)>(windowW+doorW)/2+.18) openings.push({x,w:windowW,bottom:Math.max(.8,windowY-windowH/2),top:Math.min(h-.2,windowY+windowH/2),kind:'window'});
+    }
+  }
+  const addSegment=(x,y,sx,sy)=>{if(sx<=.02||sy<=.02)return;const mesh=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,t),material);mesh.position.set(x,y,z);group.add(mesh);};
+  // Full-height wall strips between openings.
+  const spans=[...openings].sort((a,b)=>a.x-a.w/2-b.x+b.w/2);
+  let cursor=-w/2;
+  for(const o of spans){const left=o.x-o.w/2,right=o.x+o.w/2;addSegment((cursor+left)/2,h/2,left-cursor,h);cursor=Math.max(cursor,right);}
+  addSegment((cursor+w/2)/2,h/2,w/2-cursor,h);
+  // Fill the area above each opening; window sills are intentionally left open below.
+  for(const o of spans){
+    if(o.kind==='door') addSegment(o.x,(o.top+h)/2,o.w,h-o.top);
+    else {
+      addSegment(o.x,o.top+(h-o.top)/2,o.w,h-o.top);
+      addSegment(o.x,o.bottom/2,o.w,o.bottom);
+    }
+  }
+  // Door leaf and glazing sit inside their actual wall openings.
+  const door=new THREE.Mesh(new THREE.BoxGeometry(doorW-.04,doorH-.03,.035),makeMat(0x986b48));
+  door.position.set(doorX,doorH/2,z+.012);group.add(door);
+  const knob=new THREE.Mesh(new THREE.SphereGeometry(.04,10,8),makeMat(0xe4c47c,.25));
+  knob.position.set(doorX+doorW*.32,doorH*.52,z+.045);group.add(knob);
+  for(const o of spans.filter(o=>o.kind==='window')){
+    const glass=new THREE.Mesh(new THREE.BoxGeometry(o.w-.08,o.top-o.bottom-.08,.025),new THREE.MeshStandardMaterial({color:0xaed5df,roughness:.18,metalness:.15,transparent:true,opacity:.78}));
+    glass.position.set(o.x,(o.top+o.bottom)/2,z+.012);group.add(glass);
+    const frameMat=makeMat(0xf1eee4);
+    for(const x of [o.x-o.w/2,o.x+o.w/2]){
+      const jamb=new THREE.Mesh(new THREE.BoxGeometry(.045,o.top-o.bottom,.05),frameMat);jamb.position.set(x,(o.top+o.bottom)/2,z+.025);group.add(jamb);
+    }
+    const sill=new THREE.Mesh(new THREE.BoxGeometry(o.w,.045,.05),frameMat);sill.position.set(o.x,o.bottom,z+.025);group.add(sill);
+  }
+}
+
 function addEdge(group,w,h,l){const e=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w,h,l)),new THREE.LineBasicMaterial({color:0x53605d}));e.position.y=h/2;group.add(e);}
 function clearSelection(){if(selected)selected.traverse(o=>{if(o.material&&o.material.emissive)o.material.emissive.set(0x000000);});selected=null;$('#emptySelection').hidden=false;$('#pieceEditor').hidden=true;$('#selectionName').textContent='Nothing selected yet';}
 function select(group){if(selected&&selected!==group)selected.traverse(o=>{if(o.material&&o.material.emissive)o.material.emissive.set(0x000000);});selected=group;$('#emptySelection').hidden=true;$('#pieceEditor').hidden=false;$('#selectionName').textContent=group.userData.label;const d=group.userData;$('#pieceWidth').value=d.w;$('#pieceLength').value=d.l;$('#pieceHeight').value=d.h;$('#pieceX').value=group.position.x;$('#pieceZ').value=group.position.z;$('#pieceLabel').value=d.label;$('#widthOut').textContent=d.w.toFixed(1)+' m';$('#lengthOut').textContent=d.l.toFixed(1)+' m';$('#heightOut').textContent=d.h.toFixed(1)+' m';$('#xOut').textContent=group.position.x.toFixed(1)+' m';$('#zOut').textContent=group.position.z.toFixed(1)+' m';$$('.swatch').forEach(b=>b.classList.toggle('active',b.dataset.finish===d.finish));}
